@@ -1,0 +1,21 @@
+@import "./_basket/main_basket.scss";
+@import "./__wrapper/main__wrapper.scss";
+@import "./__wrapper-right/main__wrapper-right.scss";
+@import "./__title-wrapper/main__title-wrapper.scss";
+@import "./__title-wrapper/_basket/main__title-wrapper_basket.scss";
+@import "./__title/main__title.scss";
+@import "./__links-list/main__links-list.scss";
+@import "./__links-item/main__links-item.scss";
+@import "./__link/main__link.scss";
+
+.main {
+  margin: 0 auto;
+  padding: 0;
+  margin-top: -45px;
+  margin-bottom: 34px;
+
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 1020px;
+  max-width: 1400px;
+}

@@ -1,0 +1,15 @@
+.footer__column {
+  display: flex;
+  flex-direction: column;
+
+  margin: 0;
+  padding: 0;
+  margin-right: 23px;
+  padding-top: 7px;
+
+  width: 139px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}

@@ -1,0 +1,21 @@
+.main__link {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  color: #474747;
+  text-decoration: none;
+  letter-spacing: 0.7px;
+
+  margin: 0;
+  padding: 0;
+
+  &:hover,
+  &:focus {
+    color: #474747;
+  }
+
+  &:active {
+    color: rgba(71, 71, 71, 0.5);
+  }
+}

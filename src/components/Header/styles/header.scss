@@ -1,0 +1,26 @@
+@import "./__logo-link/header__logo-link.scss";
+@import "./__wrapper-top/header__wrapper-top.scss";
+@import "./__wrapper/header__wrapper.scss";
+@import "./__nav/header__nav.scss";
+@import "./__nav-list/header__nav-list.scss";
+@import "./__nav-item/header__nav-item.scss";
+@import "./__nav-link/header__nav-link.scss";
+@import "./__buttons-list/header__buttons-list.scss";
+@import "./__buttons-item/header__buttons-item.scss";
+@import "./__button/header__button.scss";
+@import "./__button-icon/header__button-icon.scss";
+@import "./__image-wrapper/header__image-wrapper.scss";
+@import "./__guitar-image/header__guitar-image.scss";
+@import "./__button/_basket/header__button_basket.scss";
+@import "./__button-indicator/header__button-indicator.scss";
+@import "./__picture/header__picture.scss";
+
+.header {
+  display: flex;
+  flex-direction: column;
+
+  margin: 0 auto;
+  padding: 0;
+
+  width: 100%;
+}

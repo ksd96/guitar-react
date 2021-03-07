@@ -1,0 +1,16 @@
+.footer__about-text {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  letter-spacing: 0.2px;
+  color: #ffffff;
+
+  margin: 0;
+  padding: 0;
+  margin-bottom: 13px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

@@ -1,0 +1,19 @@
+@import "./__title/sort__title.scss";
+@import "./__wrapper-type/sort__wrapper-type.scss";
+@import "./__button-type/sort__button-type.scss";
+@import "./__button-type/_active/sort__button-type_active.scss";
+@import "./__wrapper-buttons/sort__wrapper-buttons.scss";
+@import "./__button/sort__button.scss";
+@import "./__button-icon/sort__button-icon.scss";
+@import "./__button/_active/sort__button_active.scss";
+
+.sort {
+  display: flex;
+  align-items: center;
+
+  margin: 0;
+  padding: 0;
+  margin-bottom: 23px;
+
+  width: 100%;
+}

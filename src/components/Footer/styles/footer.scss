@@ -1,0 +1,47 @@
+@import "./__wrapper-bottom/footer__wrapper-bottom.scss";
+@import "./__columns/footer__columns.scss";
+@import "./__wrapper-socials/footer__wrapper-socials.scss";
+@import "./__socials-list/footer__socials-list.scss";
+@import "./__social-item/footer__social-item.scss";
+@import "./__social-link/footer__social-link.scss";
+@import "./__wrapper-links/footer__wrapper-links.scss";
+@import "./__column/footer__column.scss";
+@import "./__heading/footer__heading.scss";
+@import "./__heading/_about/footer__heading_about.scss";
+@import "./__column-list/footer__column-list.scss";
+@import "./__about-text/footer__about-text.scss";
+@import "./__column-item/footer__column-item.scss";
+@import "./__column-link/footer__column-link.scss";
+@import "./__contacts-text/footer__contacts-text.scss";
+@import "./__span/_type/footer__span_type_phone.scss";
+@import "./__span/_type/footer__span_type_time.scss";
+
+.footer {
+  display: flex;
+  flex-direction: column;
+
+  margin: 0 auto;
+  padding: 0;
+  padding-top: 70px;
+
+  width: 100%;
+
+  // background-image: url("../img/guitar-footer.png");
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-size: 821px 244px;
+
+  &::before {
+    content: "";
+
+    width: 100%;
+    height: 6px;
+
+    background: #3f3f3f;
+
+    position: relative;
+
+    top: -10px;
+    left: 0;
+  }
+}

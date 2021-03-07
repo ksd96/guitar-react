@@ -1,0 +1,28 @@
+@import "./__picture/card__picture.scss";
+@import "./__image/card__image.scss";
+@import "./__rating-wrapper/card__rating-wrapper.scss";
+@import "./__rating/card__rating.scss";
+@import "./__title-wrapper/card__title-wrapper.scss";
+@import "./__title/card__title.scss";
+@import "./__price/card__price.scss";
+@import "./__buttons/card__buttons.scss";
+@import "./__button/card__button.scss";
+@import "./__button/_type/card__button_type_buy.scss";
+@import "./__button/_type/card__button_type_more.scss";
+@import "./__star/card__star.scss";
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin: 0;
+  padding: 0 14px;
+  padding-top: 16px;
+  padding-bottom: 20px;
+
+  box-sizing: border-box;
+  min-width: 220px;
+
+  border: 1px solid #dddada;
+}
