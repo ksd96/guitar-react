@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.a0440391.chunk.css",
-    "main.js": "/static/js/main.a8f5937e.chunk.js",
-    "main.js.map": "/static/js/main.a8f5937e.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.028617af.js",
-    "runtime-main.js.map": "/static/js/runtime-main.028617af.js.map",
-    "static/js/2.6f68d9bf.chunk.js": "/static/js/2.6f68d9bf.chunk.js",
-    "static/js/2.6f68d9bf.chunk.js.map": "/static/js/2.6f68d9bf.chunk.js.map",
+    "main.css": "/./static/css/main.b4291fab.chunk.css",
+    "main.js": "/static/js/main.dd876bb8.chunk.js",
+    "main.js.map": "/static/js/main.dd876bb8.chunk.js.map",
+    "runtime-main.js": "/./static/js/runtime-main.028617af.js",
+    "runtime-main.js.map": "/./static/js/runtime-main.028617af.js.map",
+    "static/js/2.d4eb75f4.chunk.js": "/static/js/2.d4eb75f4.chunk.js",
+    "static/js/2.d4eb75f4.chunk.js.map": "/static/js/2.d4eb75f4.chunk.js.map",
+    "./static/css/main.b4291fab.chunk.css.map": "/./static/css/main.b4291fab.chunk.css.map",
+    "static/media/fonts.scss": "/./static/media/DroidSans.f8225420.woff",
     "index.html": "/index.html",
-    "static/css/main.a0440391.chunk.css.map": "/static/css/main.a0440391.chunk.css.map",
-    "static/js/2.6f68d9bf.chunk.js.LICENSE.txt": "/static/js/2.6f68d9bf.chunk.js.LICENSE.txt",
-    "static/media/fonts.scss": "/static/media/DroidSans.f8225420.woff"
+    "static/js/2.d4eb75f4.chunk.js.LICENSE.txt": "/static/js/2.d4eb75f4.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.028617af.js",
-    "static/js/2.6f68d9bf.chunk.js",
-    "static/css/main.a0440391.chunk.css",
-    "static/js/main.a8f5937e.chunk.js"
+    "./static/js/runtime-main.028617af.js",
+    "static/js/2.d4eb75f4.chunk.js",
+    "./static/css/main.b4291fab.chunk.css",
+    "static/js/main.dd876bb8.chunk.js"
   ]
 }
