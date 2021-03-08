@@ -1,0 +1,24 @@
+@import "./__title/filter__title.scss";
+@import "./__title-item/filter__title-item.scss";
+@import "./__price/filter__price.scss";
+@import "./__price-wrapper/filter__price-wrapper.scss";
+@import "./__price-input/filter__price-input.scss";
+@import "./__price-span/filter__price-span.scss";
+@import "./__type/filter__type.scss";
+@import "./__list/filter__list.scss";
+@import "./__item/filter__item.scss";
+@import "./__label/filter__label.scss";
+@import "./__input/filter__input.scss";
+@import "./__name/filter__name.scss";
+@import "./__submit/filter__submit.scss";
+
+.filter {
+  display: flex;
+  flex-direction: column;
+
+  width: 208px;
+
+  margin: 0;
+  padding: 0;
+  margin-right: 32px;
+}

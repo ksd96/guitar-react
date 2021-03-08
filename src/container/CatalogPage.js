@@ -1,155 +1,82 @@
-import React, { useState, useReducer, useEffect } from 'react';
+import React, { useState, useReducer, useEffect, useMemo } from 'react';
+import getFilteredCards from '../data/utils/getFilteredCards.js';
+import getInitialFilters from '../data/utils/getInitialFilters.js';
 
 import Header from '../components/Header/Header.js';
 import Footer from '../components/Footer/Footer.js';
 import CardsList from '../components/CardsList/CardsList.js';
 import ButtonPage from '../components/ButtonPage/ButtonPage.js';
 import Sorting from '../components/Sorting/Sorting.js';
+import Filters from '../components/Filters/Filters.js';
 
 import './styles/main/main.scss';
 import './styles/cards/cards.scss';
 import './styles/pages/pages.scss';
-import Store from '../store/store.js';
-
-let initialState = {
-  filters: {
-    type: null,
-    strings: null,
-    price: {
-      min: null,
-      max: null
-    }
-  },
-  sort: {
-    price: `min`,
-    popularity: `min`
-  },
-  cards: [],
-  pageCards: [],
-  page: 1
-}
 
 const reducer = (state, action) => {
-  // сортирует по цене
-  const getSortPrice = () => {
-    const guitars = state.cards;
-    if (state.sort.price === `min`) {
-      guitars.sort((a, b) => {
-        return a.price - b.price;
-      });
-    } else if (state.sort.price === `max`) {
-      guitars.sort((a, b) => {
-        return b.price - a.price;
-      });
-    }
-    return guitars;
-  }
-
-  // сортирует по популярности
-  const getSortPopularity = () => {
-    const guitars = state.cards;
-    if (state.sort.popularity === `min`) {
-      guitars.sort((a, b) => {
-        return a.popularity - b.popularity;
-      });
-    } else if (state.sort.popularity === `max`) {
-      guitars.sort((a, b) => {
-        return b.popularity - a.popularity;
-      });
-    }
-    return guitars;
-  }
-
   switch (action.type) {
-    case 'init':
+    case 'CHANGE_ACTIVE_SORT':
       return {
         ...state,
-        filters: action.filters,
-        cards: action.cards,
-        pageCards: action.cards.slice(((9 * state.page) - 9), (9 * state.page))
-      }
-    case 'setPageCards':
+        sortActive: action.payload,
+        pageNumber: 1
+      };
+    case 'CHANGE_TYPE_SORT':
       return {
         ...state,
-        page: action.pageNumber,
-        pageCards: state.cards.slice(((9 * action.pageNumber) - 9), (9 * action.pageNumber))
-      }
-    case 'nextPage':
-      const nextPage = state.page + 1;
-      if (nextPage <= ((state.cards.length)/9)) {
-        return {
-          ...state,
-          page: nextPage,
-          pageCards: state.cards.slice(((9 * nextPage) - 9), (9 * nextPage))
-        }
-      } else {
-        return state
-      }
-    case 'sortPrice':
-      let sortedCardsByPrice = getSortPrice();
+        sortType: action.payload,
+        sortActive: state.sortActive ? `${state.sortActive}` : `price`,
+        pageNumber: 1
+      };
+    case 'CHANGE_PAGE':
       return {
         ...state,
-        cards: sortedCardsByPrice,
-        pageCards: sortedCardsByPrice.slice(0, 9),
-        page: 1
-      }
-    case 'sortPopularity':
-      let sortedCardsByPopularity = getSortPopularity();
-      return {
-        ...state,
-        cards: sortedCardsByPopularity,
-        pageCards: sortedCardsByPopularity.slice(0, 9),
-        page: 1
+        pageNumber: action.payload
       }
     default:
       throw new Error();
   }
 }
 
-const data = require('../data/data.json');
-const api = new Store(data.guitars);
+const CatalogPage = (props) => {
+  const [cards, setCards] = useState(props.store);
+  const allFilters = getInitialFilters(cards);
+  const [filters, dispatch] = useReducer(reducer, allFilters);
 
-const CatalogPage = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const getCardsToRender = useMemo(() => {
+    return getFilteredCards(filters, cards);
+  }, [filters, cards]);
 
-  useEffect(() => {
-    dispatch({type: `init`, cards: api.getGuitars(), filters: api.getFiltersValue()});
-  }, []);
+  const getPageCards = getCardsToRender.slice((9 * filters.pageNumber) - 9, 9 * filters.pageNumber);
 
-  const pageNumbers = () => {
-    const numbers = [];
-    for (let i = 1; i <= ((state.cards.length)/9); i++) {
-      numbers.push(i);
+  const nextPage = () => {
+    if(filters.pageNumber < (getCardsToRender.length / 9)) {
+      dispatch({type: `CHANGE_PAGE`, payload: filters.pageNumber + 1});
     };
-    return numbers;
-  }
+  };
 
-console.log(state);
+  console.log(filters);
 
   return (
     <div className="content">
       <Header />
       <main className="main">
         <div className="main__wrapper">
+          <Filters filters={allFilters} />
           <div className="main__wrapper-right">
-            <Sorting
-              onSortPrice={() => {dispatch({type: `sortPrice`})}}
-              onSortPopularity={() => {dispatch({type: `sortPopularity`})}}
-            />
-            <CardsList guitars={state.pageCards} />
+            <Sorting dispatch={dispatch} filters={filters} />
+            <CardsList guitars={getPageCards} />
           </div>
         </div>
         <section className="pages">
           <ul className="pages__list">
             {
-              pageNumbers().map((number) => {
-                return (
-                  <ButtonPage key={number} onClick={() => dispatch({type: `setPageCards`, pageNumber: number})} page={number} />
-                )
+              allFilters.allPages.map((page) => {
+                return (<ButtonPage dispatch={dispatch} key={page} page={page} activePage={filters.pageNumber} />)
               })
             }
           </ul>
-          <button onClick={() => dispatch({type: `nextPage`})} className="pages__button-next" type="button">Далее</button>
+          <button onClick={nextPage} className="pages__button-next" type="button">Далее</button>
         </section>
       </main>
       <Footer />
