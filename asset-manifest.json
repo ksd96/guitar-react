@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/guitar-react/static/css/main.b950d607.chunk.css",
-    "main.js": "/guitar-react/static/js/main.dd876bb8.chunk.js",
-    "main.js.map": "/guitar-react/static/js/main.dd876bb8.chunk.js.map",
-    "runtime-main.js": "/guitar-react/static/js/runtime-main.028617af.js",
-    "runtime-main.js.map": "/guitar-react/static/js/runtime-main.028617af.js.map",
-    "guitar-react/static/js/2.d4eb75f4.chunk.js": "/guitar-react/static/js/2.d4eb75f4.chunk.js",
-    "guitar-react/static/js/2.d4eb75f4.chunk.js.map": "/guitar-react/static/js/2.d4eb75f4.chunk.js.map",
-    "guitar-react/static/css/main.b950d607.chunk.css.map": "/guitar-react/static/css/main.b950d607.chunk.css.map",
-    "guitar-react/static/js/2.d4eb75f4.chunk.js.LICENSE.txt": "/guitar-react/static/js/2.d4eb75f4.chunk.js.LICENSE.txt",
-    "guitar-react/static/media/fonts.scss": "/guitar-react/static/media/DroidSans.f8225420.woff",
+    "main.css": "/./guitar-react/static/css/main.73ac6706.chunk.css",
+    "main.js": "/./guitar-react/static/js/main.dd876bb8.chunk.js",
+    "main.js.map": "/./guitar-react/static/js/main.dd876bb8.chunk.js.map",
+    "runtime-main.js": "/./guitar-react/static/js/runtime-main.028617af.js",
+    "runtime-main.js.map": "/./guitar-react/static/js/runtime-main.028617af.js.map",
+    "./guitar-react/static/js/2.d4eb75f4.chunk.js": "/./guitar-react/static/js/2.d4eb75f4.chunk.js",
+    "./guitar-react/static/js/2.d4eb75f4.chunk.js.map": "/./guitar-react/static/js/2.d4eb75f4.chunk.js.map",
+    "./guitar-react/static/css/main.73ac6706.chunk.css.map": "/./guitar-react/static/css/main.73ac6706.chunk.css.map",
+    "./guitar-react/static/js/2.d4eb75f4.chunk.js.LICENSE.txt": "/./guitar-react/static/js/2.d4eb75f4.chunk.js.LICENSE.txt",
+    "guitar-react/static/media/fonts.scss": "/./guitar-react/static/media/DroidSans.f8225420.woff",
     "index.html": "/index.html"
   },
   "entrypoints": [
-    "guitar-react/static/js/runtime-main.028617af.js",
-    "guitar-react/static/js/2.d4eb75f4.chunk.js",
-    "guitar-react/static/css/main.b950d607.chunk.css",
-    "guitar-react/static/js/main.dd876bb8.chunk.js"
+    "./guitar-react/static/js/runtime-main.028617af.js",
+    "./guitar-react/static/js/2.d4eb75f4.chunk.js",
+    "./guitar-react/static/css/main.73ac6706.chunk.css",
+    "./guitar-react/static/js/main.dd876bb8.chunk.js"
   ]
 }
