@@ -6,7 +6,7 @@ const Header = () => {
       <div className="header__wrapper-top">
         <div className="header__wrapper">
           <a className="header__logo-link" href="#">
-            <img className="header__logo" width="67" height="70" src="./img/logo.svg" alt="Логотип" />
+            <svg className="header__logo" width="67" height="70"><use xlinkHref="#logo"></use></svg>
           </a>
           <nav className="header__nav">
             <ul className="header__nav-list">

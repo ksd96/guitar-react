@@ -41,7 +41,7 @@
 
 /* стили для чекбокса, находящегося в состоянии checked */
 .filter__label > input:checked + span::before {
-  // background-image: url("../img/icon-check.svg");
+  background-image: url("../../img/icon-check.svg");
   background-repeat: no-repeat;
   background-position: center;
 }

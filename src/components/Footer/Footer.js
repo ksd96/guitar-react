@@ -75,7 +75,7 @@ const Footer = () => {
           <div className="footer__wrapper-contacts">
             <div className="footer__column">
               <h2 className="footer__heading">Контакты</h2>
-              <p class="footer__contacts-text">
+              <p className="footer__contacts-text">
                 <span className="footer__span">г. Санкт-Петербург,</span>
                 <span className="footer__span">м. Невский проспект,</span>
                 <span className="footer__span">ул. Казанская 6. </span>
