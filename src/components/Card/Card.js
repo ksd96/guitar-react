@@ -1,12 +1,16 @@
 import './styles/card.scss';
+import PropTypes from 'prop-types';
 
-const Card = (props) => {
+const Card = ({
+  guitar,
+  openPopupAddBasket
+}) => {
   return (
     <li className="card">
       <picture className="card__picture">
-        <source className="card__image-webp" type="image/webp" srcSet={`./img/${props.img}.webp`}  />
+        <source className="card__image-webp" type="image/webp" srcSet={`./img/${guitar.img}.webp`}  />
 
-        <img className="card__image" src={`./img/${props.img}.png`} alt="гитара" width="68" height="190" />
+        <img className="card__image" src={`./img/${guitar.img}.png`} alt="гитара" width="68" height="190" />
       </picture>
       <div className="card__rating-wrapper">
         <svg className="card__star" width="10" height="10"><use xlinkHref="#icon-star"></use></svg>
@@ -14,18 +18,23 @@ const Card = (props) => {
         <svg className="card__star" width="10" height="10"><use xlinkHref="#icon-star"></use></svg>
         <svg className="card__star" width="10" height="10"><use xlinkHref="#icon-star"></use></svg>
         <svg className="card__star" width="10" height="10"><use xlinkHref="#icon-star"></use></svg>
-        <p className="card__rating">{props.popularity}</p>
+        <p className="card__rating">{guitar.popularity}</p>
       </div>
       <div className="card__title-wrapper">
-        <h3 className="card__title">{props.name}</h3>
-        <p className="card__price"><span className="card__price-content">{props.price}</span> ₽</p>
+        <h3 className="card__title">{guitar.name}</h3>
+        <p className="card__price"><span className="card__price-content">{guitar.price}</span> ₽</p>
       </div>
       <div className="card__buttons">
         <button className="card__button card__button_type_more" type="button">Подробнее</button>
-        <button className="card__button card__button_type_buy" type="button">Купить</button>
+        <button onClick={openPopupAddBasket} className="card__button card__button_type_buy" type="button">Купить</button>
       </div>
     </li>
   );
 };
+
+Card.propTypes = {
+  guitar: PropTypes.object,
+  openPopupAddBasket: PropTypes.func
+}
 
 export default Card;

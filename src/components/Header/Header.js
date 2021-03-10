@@ -1,5 +1,7 @@
 import './styles/header.scss';
 
+import { Link } from 'react-router-dom';
+
 const Header = () => {
   return (
     <header className="header">
@@ -36,10 +38,10 @@ const Header = () => {
               </a>
             </li>
             <li className="header__buttons-item">
-              <a href="./basket.html" className="header__button header__button_basket">
+              <Link to="/basket" className="header__button header__button_basket">
                 <span className="header__button-indicator">1</span>
                 <svg className="header__button-icon" width="13" height="13"><use xlinkHref="#icon-basket"></use></svg>
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

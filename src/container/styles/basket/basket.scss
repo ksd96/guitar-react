@@ -1,0 +1,21 @@
+@import "./__list/basket__list.scss";
+@import "./__ordering/basket__ordering.scss";
+@import "./__promo-wrapper/basket__promo-wrapper.scss";
+@import "./__title/basket__title.scss";
+@import "./__subtitle/basket__subtitle.scss";
+@import "./__code-wrapper/basket__code-wrapper.scss";
+@import "./__code/basket__code.scss";
+@import "./__code-submit/basket__code-submit.scss";
+@import "./__checkout-wrapper/basket__checkout-wrapper.scss";
+@import "./__price/basket__price.scss";
+@import "./__checkout/basket__checkout.scss";
+
+.basket {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
+  margin: 0;
+  padding: 0;
+}

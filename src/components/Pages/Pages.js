@@ -1,24 +1,32 @@
 import ButtonPage from '../ButtonPage/ButtonPage.js';
+import PropTypes from 'prop-types';
 
-const Pages = (props) => {
-  const nextPage = () => {
-    if(props.filters.pageNumber < (props.getCardsToRender.length / 9)) {
-      props.dispatch({type: `CHANGE_PAGE`, payload: props.filters.pageNumber + 1});
-    };
-  };
+const Pages = ({
+  getNextPage,
+  pages,
+  activePage,
+  getPage
+}) => {
 
   return (
     <section className="pages">
       <ul className="pages__list">
         {
-          props.pages.map((page) => {
-            return (<ButtonPage dispatch={props.dispatch} key={page} page={page} activePage={props.filters.pageNumber} />)
+          pages.map((page) => {
+            return (<ButtonPage getPage={getPage} key={page} page={page} activePage={activePage} />)
           })
         }
       </ul>
-      <button onClick={nextPage} className="pages__button-next" type="button">Далее</button>
+      <button onClick={getNextPage} className="pages__button-next" type="button">Далее</button>
     </section>
   )
+}
+
+Pages.propTypes = {
+  getNextPage: PropTypes.func,
+  pages: PropTypes.array,
+  activePage: PropTypes.number,
+  getPage: PropTypes.func
 }
 
 export default Pages;

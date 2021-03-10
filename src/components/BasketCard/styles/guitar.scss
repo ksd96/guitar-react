@@ -1,0 +1,23 @@
+@import "./__delete/guitar__delete.scss";
+@import "./__img/guitar__img.scss";
+@import "./__wrapper/guitar__wrapper.scss";
+@import "./__title/guitar__title.scss";
+@import "./__article/guitar__article.scss";
+@import "./__type/guitar__type.scss";
+@import "./__price/guitar__price.scss";
+@import "./__buttons/guitar__buttons.scss";
+@import "./__button/guitar__button.scss";
+@import "./__quantity/guitar__quantity.scss";
+@import "./__full-price/guitar__full-price.scss";
+@import "./__picture/guitar__picture.scss";
+
+.guitar {
+  display: flex;
+
+  margin: 0;
+  padding: 20px 0;
+
+  width: 100%;
+
+  border-top: 0.7px solid #dddada;
+}

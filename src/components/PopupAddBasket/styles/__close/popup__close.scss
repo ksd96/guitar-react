@@ -1,0 +1,26 @@
+.popup__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  top: 23px;
+  right: 23px;
+
+  margin: 0;
+  padding: 0;
+
+  width: 20px;
+  height: 20px;
+
+  border: none;
+
+  background: inherit;
+
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    opacity: 0.5;
+  }
+}

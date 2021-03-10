@@ -1,0 +1,32 @@
+@import "./__close/popup__close.scss";
+@import "./__title/popup__title.scss";
+@import "./__wrapper/popup__wrapper.scss";
+@import "./__img/popup__img.scss";
+@import "./__info/popup__info.scss";
+@import "./__guitar-title/popup__guitar-title.scss";
+@import "./__article/popup__article.scss";
+@import "./__type/popup__type.scss";
+@import "./__price/popup__price.scss";
+@import "./__button/popup__button.scss";
+@import "./__wrapper/_added/popup__wrapper_added.scss";
+@import "./__wrapper-buttons/popup__wrapper-buttons.scss";
+@import "./__button/_type/popup__button_type_go-basket.scss";
+@import "./__button/_type/popup__button_type_go-shoping.scss";
+@import "./__button/_type/popup__button_type_delete.scss";
+
+.popup {
+  display: flex;
+  flex-direction: column;
+
+  position: relative;
+
+  margin: 0;
+  padding: 30px 50px;
+
+  box-sizing: border-box;
+  width: 740px;
+
+  background: #ffffff;
+  box-shadow: 0 5px 6px rgba(63, 63, 63, 0.2);
+  border-radius: 4px;
+}

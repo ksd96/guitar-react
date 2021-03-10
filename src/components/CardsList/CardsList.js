@@ -1,18 +1,20 @@
 import Card from '../Card/Card.js';
+import PropTypes from 'prop-types';
 
-const CardsList = (props) => {
+const CardsList = ({
+  guitars,
+  openPopupAddBasket
+}) => {
   return (
     <section className="cards">
     <ul className="cards__list">
       {
-        props.guitars.map((guitar) => {
+        guitars.map((guitar) => {
           return (
             <Card
-              img={guitar.img}
-              popularity={guitar.popularity}
-              name={guitar.name}
-              price={guitar.price}
+              guitar={guitar}
               key={guitar.article}
+              openPopupAddBasket={() => {openPopupAddBasket(guitar)}}
             />
           )
         })
@@ -20,6 +22,11 @@ const CardsList = (props) => {
     </ul>
   </section>
   )
-}
+};
+
+CardsList.propTypes = {
+  guitars: PropTypes.array,
+  openPopupAddBasket: PropTypes.func
+};
 
 export default CardsList;

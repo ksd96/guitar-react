@@ -1,27 +1,34 @@
 import './styles/filter.scss';
-
+import PropTypes from 'prop-types';
 import FilterTypeItem from '../FilterTypeItem/FilterTypeItem.js';
 import {getStringsGuitarArray, getFilteredGuitarsStrings, getFilteredGuitarsTypes, getTypesGuitarArray} from '../../data/utils/utils.js';
 
-const Filters = (props) => {
-
-  // изменение состояния фильтров
-  const setFilteredGuitars = () => {
-    props.dispatch({type: `CHANGE_FILTERS`, payload: getFilteredGuitars()});
-  }
-
+const Filters = ({
+  setTypesGuitars,
+  setStringsGuitars,
+  setPriceGuitars,
+  allFilters,
+  cards
+}) => {
   // получение активных фильтров
   const getFilteredGuitars = () => {
     const priceMin = document.querySelector(`.filter__price-input_type_min`);
     const priceMax = document.querySelector(`.filter__price-input_type_max`);
     const filtersTypes = document.querySelectorAll(`[name="types"]`);
     const filtersStrings = document.querySelectorAll(`[name="strings"]`);
-    const filterData = {};
+    const filterData = {
+      "type": null,
+      "strings": null,
+      "price": {
+        "min": null,
+        "max": null
+      }
+    };
 
     filterData.type = [];
     filterData.strings = [];
-    filterData.priceMin = priceMin.value;
-    filterData.priceMax = priceMax.value;
+    filterData.price.min = priceMin.value;
+    filterData.price.max = priceMax.value;
     filtersTypes.forEach((item) => {
       if (item.checked) {
         filterData.type.push(item.value);
@@ -39,12 +46,12 @@ const Filters = (props) => {
   const onChangePriceMin = () => {
     const priceMin = document.querySelector(`.filter__price-input_type_min`);
     const priceMax = document.querySelector(`.filter__price-input_type_max`);
-    if (+priceMin.value < +props.allFilters.price.min) {
-      priceMin.value = props.allFilters.price.min;
+    if (+priceMin.value < +allFilters.price.min) {
+      priceMin.value = allFilters.price.min;
     } else if (+priceMin.value >= +priceMax.value) {
       priceMin.value = priceMax.value;
     }
-    setFilteredGuitars();
+    setPriceGuitars(getFilteredGuitars().price);
     clickFilterItemTypes(getFilteredGuitars());
     clickFilterItemStrings(getFilteredGuitars());
   }
@@ -56,14 +63,14 @@ const Filters = (props) => {
     if (+priceMax.value <= +priceMin.value) {
       priceMax.value = priceMin.value;
     }
-    setFilteredGuitars();
+    setPriceGuitars(getFilteredGuitars().price);
     clickFilterItemTypes(getFilteredGuitars());
     clickFilterItemStrings(getFilteredGuitars());
   }
 
   // валидация фильтра по типу гитар
   const clickFilterItemTypes = (filters) => {
-    const typeGuitars = getTypesGuitarArray(getFilteredGuitarsStrings(props.cards, filters));
+    const typeGuitars = getTypesGuitarArray(getFilteredGuitarsStrings(cards, filters));
     const typeGuitarsAll = document.querySelectorAll(`[name="types"]`);
 
     typeGuitarsAll.forEach((item) => {
@@ -80,7 +87,7 @@ const Filters = (props) => {
 
       // валидация фильтра по количеству струн
   const clickFilterItemStrings = (filters) => {
-    const typeGuitars = getStringsGuitarArray(getFilteredGuitarsTypes(props.cards, filters));
+    const typeGuitars = getStringsGuitarArray(getFilteredGuitarsTypes(cards, filters));
     const typeGuitarsAll = document.querySelectorAll(`[name="strings"]`);
     typeGuitarsAll.forEach((item) => {
       item.disabled = true;
@@ -102,22 +109,28 @@ const Filters = (props) => {
           <h3 className="filter__title-item">Цена, ₽</h3>
           <div className="filter__price-wrapper">
             <label className="visually-hidden" htmlFor="price-min">Минимальная цена</label>
-            <input onBlur={onChangePriceMin} id="price-min" type="text" defaultValue={props.allFilters.price.min} className="filter__price-input filter__price-input_type_min" />
+            <input onBlur={onChangePriceMin} id="price-min" type="text" defaultValue={allFilters.price.min} className="filter__price-input filter__price-input_type_min" />
             <span className="filter__price-span"></span>
             <label className="visually-hidden" htmlFor="price-max">Максимальная цена</label>
-            <input onBlur={onChangePriceMax} id="price-max" type="text" defaultValue={props.allFilters.price.max} className="filter__price-input filter__price-input_type_max" />
+            <input onBlur={onChangePriceMax} id="price-max" type="text" defaultValue={allFilters.price.max} className="filter__price-input filter__price-input_type_max" />
           </div>
         </div>
         <div className="filter__type">
           <h3 className="filter__title-item">Тип гитар</h3>
           <ul className="filter__list filter__list_type">
             {
-              Array.from(props.allFilters.type).map((type) => {
+              Array.from(allFilters.type).map((type) => {
                 return (
-                  <FilterTypeItem onClick={ () => {
-                    setFilteredGuitars();
-                    clickFilterItemStrings(getFilteredGuitars());
-                  }} name={`types`} key={type} typeName={type}/>
+                  <FilterTypeItem
+                    onClick={() => {
+                      setTypesGuitars(getFilteredGuitars().type);
+                      clickFilterItemStrings(getFilteredGuitars());
+                    }}
+                    name={`types`}
+                    key={type}
+                    typeName={type}
+
+                  />
                 )
               })
             }
@@ -127,12 +140,17 @@ const Filters = (props) => {
           <h3 className="filter__title-item">Колличество струн</h3>
           <ul className="filter__list filter__list_numbers">
             {
-              Array.from(props.allFilters.strings).map((type) => {
+              Array.from(allFilters.strings).map((type) => {
                 return (
-                  <FilterTypeItem onClick={() => {
-                    setFilteredGuitars();
-                    clickFilterItemTypes(getFilteredGuitars());
-                  }} name={`strings`} key={type} typeName={type}/>
+                  <FilterTypeItem
+                    onClick={() => {
+                      setStringsGuitars(getFilteredGuitars().strings);
+                      clickFilterItemTypes(getFilteredGuitars());
+                    }}
+                    name={`strings`}
+                    key={type}
+                    typeName={`${type}`}
+                  />
                 )
               })
             }
@@ -141,6 +159,14 @@ const Filters = (props) => {
       </form>
     </section>
   )
-}
+};
+
+Filters.propTypes = {
+  setTypesGuitars: PropTypes.func,
+  setStringsGuitars: PropTypes.func,
+  setPriceGuitars: PropTypes.func,
+  allFilters: PropTypes.object,
+  cards: PropTypes.object
+};
 
 export default Filters;

@@ -74,9 +74,9 @@ const getFilteredCards = (filters, state) => {
     filteredCards = filteringByType(filteredCards, filters.type);
     filteredCards = filteringByStrings(filteredCards, filters.strings);
     filteredCards = filteringByPrice(filteredCards, filters.price.min, filters.price.max);
-    if(filters.sortActive === `price`) {
+    if(filters.sortState === true && filters.sortActive === `price`) {
       filteredCards = getSortPrice(filteredCards);
-    } else if(filters.sortActive === `popularity`) {
+    } else if(filters.sortState === true && filters.sortActive === `popularity`) {
       filteredCards =  getSortPopularity(filteredCards);
     }
     return filteredCards;
@@ -138,14 +138,14 @@ const filteringByPrice = (cards, minPrice, maxPrice) => {
 const getFilteredGuitarsTypes = (cards, filters) => {
   let filteredCards = cards;
   filteredCards = filteringByType(filteredCards, filters.type);
-  filteredCards = filteringByPrice(filteredCards, filters.priceMin, filters.priceMax);
+  filteredCards = filteringByPrice(filteredCards, filters.price.min, filters.price.max);
   return filteredCards;
 }
 
 const getFilteredGuitarsStrings = (cards, filters) => {
   let filteredCards = cards;
   filteredCards = filteringByStrings(filteredCards, filters.strings);
-  filteredCards = filteringByPrice(filteredCards, filters.priceMin, filters.priceMax);
+  filteredCards = filteringByPrice(filteredCards, filters.price.min, filters.price.max);
   return filteredCards;
 }
 
@@ -199,10 +199,12 @@ const getInitialFilters = (guitars) => {
         min: getMinGuitarsPrice(),
         max: getMaxGuitarsPrice()
       },
-      sortActive: false,
+      sortActive: `price`,
       sortType: `min`,
+      sortState: false,
       pageNumber: 1,
-      allPages: getAllPages()
+      allPages: getAllPages(),
+      cards: guitars
     };
 
     return filters;

@@ -4,13 +4,14 @@ const reducer = (state, action) => {
       return {
         ...state,
         sortActive: action.payload,
+        sortState: true,
         pageNumber: 1
       };
     case 'CHANGE_TYPE_SORT':
       return {
         ...state,
         sortType: action.payload,
-        sortActive: state.sortActive ? `${state.sortActive}` : `price`,
+        sortState: true,
         pageNumber: 1
       };
     case 'CHANGE_PAGE':
@@ -18,17 +19,32 @@ const reducer = (state, action) => {
         ...state,
         pageNumber: action.payload
       };
-    case 'CHANGE_FILTERS':
+    case 'CHANGE_FILTERS_TYPE':
       return {
         ...state,
-        type: action.payload.type,
-        strings: action.payload.strings,
+        type: action.payload,
+        pageNumber: 1
+      };
+    case 'CHANGE_FILTERS_STRINGS':
+      return {
+        ...state,
+        strings: action.payload,
+        pageNumber: 1
+      };
+    case 'CHANGE_FILTERS_PRICE':
+      return {
+        ...state,
         price: {
-          min: action.payload.priceMin,
-          max: action.payload.priceMax
+          min: action.payload.min,
+          max: action.payload.max
         },
         pageNumber: 1
       };
+    case 'CHANGE_CARDS':
+      return {
+        ...state,
+        cards: action.payload
+      }
     default:
       throw new Error();
   }

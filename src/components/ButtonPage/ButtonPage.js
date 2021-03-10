@@ -1,21 +1,28 @@
-const ButtonPage = (props) => {
-  const getPage = () => {
-    props.dispatch({type: `CHANGE_PAGE`, payload: props.page})
-  }
+import PropTypes from 'prop-types';
+import classNames from 'classnames/bind';
 
-  const getClass = () => {
-    if (props.activePage === props.page) {
-      return `pages__button pages__button_active`
-    } else {
-      return `pages__button`
-    }
-  }
+const ButtonPage = ({
+  getPage,
+  page,
+  activePage
+}) => {
+
+  const classButton = classNames({
+    "pages__button": true,
+    "pages__button_active": activePage === page
+  })
 
   return (
     <li className="pages__item">
-      <button onClick={getPage} className={getClass()} type="button">{props.page}</button>
+      <button onClick={() => {getPage(page)}} className={classButton} type="button">{page}</button>
      </li>
   )
+}
+
+ButtonPage.propTypes = {
+  getPage: PropTypes.func,
+  page: PropTypes.number,
+  activePage: PropTypes.number
 }
 
 export default ButtonPage;
