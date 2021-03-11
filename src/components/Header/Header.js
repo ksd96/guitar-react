@@ -1,8 +1,9 @@
 import './styles/header.scss';
 
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-const Header = () => {
+const Header = ({count}) => {
   return (
     <header className="header">
       <div className="header__wrapper-top">
@@ -39,7 +40,7 @@ const Header = () => {
             </li>
             <li className="header__buttons-item">
               <Link to="/basket" className="header__button header__button_basket">
-                <span className="header__button-indicator">1</span>
+                <span className="header__button-indicator">{count}</span>
                 <svg className="header__button-icon" width="13" height="13"><use xlinkHref="#icon-basket"></use></svg>
               </Link>
             </li>
@@ -56,6 +57,10 @@ const Header = () => {
     </header>
   )
 };
+
+Header.propTypes = {
+  count: PropTypes.number
+}
 
 export default Header;
 

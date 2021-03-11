@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const PopupGoBasket = ({
   closePopup
@@ -16,5 +17,9 @@ const PopupGoBasket = ({
     </div>
   )
 };
+
+PopupGoBasket.propTypes = {
+  closePopup: PropTypes.func
+}
 
 export default PopupGoBasket;

@@ -1,4 +1,4 @@
-const reducer = (state, action) => {
+const reducerCatalog = (state, action) => {
   switch (action.type) {
     case 'CHANGE_ACTIVE_SORT':
       return {
@@ -50,4 +50,4 @@ const reducer = (state, action) => {
   }
 }
 
-export default reducer;
+export default reducerCatalog;

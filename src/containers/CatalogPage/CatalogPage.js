@@ -1,29 +1,24 @@
 import React, { useState, useReducer, useEffect, useMemo, useCallback } from 'react';
-import { Switch, Route } from 'react-router-dom'
-import {getAllPages, getFilteredCards, getInitialFilters} from '../data/utils/utils.js';
-
-import Header from '../components/Header/Header.js';
-import Footer from '../components/Footer/Footer.js';
-import CardsList from '../components/CardsList/CardsList.js';
-import Pages from '../components/Pages/Pages.js';
-import Sorting from '../components/Sorting/Sorting.js';
-import Filters from '../components/Filters/Filters.js';
-import BreadCrumbs from '../components/BreadCrumbs/BreadCrumbs.js';
-import Ordering from '../components/Ordering/Ordering.js';
-import BasketCard from '../components/BasketCard/BasketCard.js';
-import ModalsContainer from '../components/ModalsContainer/ModalsContainer.js';
-import reducer from '../reducer/reducer.js';
+import {getAllPages, getFilteredCards, getInitialFilters} from '../../data/utils/utils.js';
+import CardsList from '../../components/CardsList/CardsList.js';
+import Pages from '../../components/Pages/Pages.js';
+import Sorting from '../../components/Sorting/Sorting.js';
+import Filters from '../../components/Filters/Filters.js';
+import BreadCrumbs from '../../components/BreadCrumbs/BreadCrumbs.js';
+import ModalsContainer from '../../components/ModalsContainer/ModalsContainer.js';
+import { addGuitar, getCardsBasket, setCardsBasket } from '../../data/utils/utils-basket.js'
+import reducerCatalog from '../../reducers/reducerCatalog.js';
+import PropTypes from 'prop-types';
 
 import './styles/main/main.scss';
 import './styles/cards/cards.scss';
 import './styles/pages/pages.scss';
-import './styles/basket/basket.scss';
 
-const data = require('../data/data.json');
+const data = require('../../data/data.json');
 
-const CatalogPage = () => {
+const CatalogPage = ({setCountGuitars}) => {
   const allFilters = getInitialFilters(data.guitars);
-  const [filters, dispatch] = useReducer(reducer, allFilters);
+  const [filters, dispatch] = useReducer(reducerCatalog, allFilters);
 
   const cardsToRender = useMemo(() => {
     return getFilteredCards(filters, filters.cards);
@@ -126,47 +121,40 @@ const CatalogPage = () => {
     data: null
   });
 
-  const [cardsBasket, setCardsBasket] = useState({cards: []});
-
-  const openPopupAddBasket = (card) => {
+  const openPopupAddBasket = useCallback((card) => {
     setModals({
       active: true,
       type: `addInBasket`,
       data: card
     })
-  };
+  }, [modals.data]);
 
-  const closePopupAddBasket = () => {
+  const closePopup = useCallback(() => {
     setModals({
       active: false,
       type: null,
       data: modals.data
     })
-  };
+  }, [modals.data]);
 
-  const addCardInBasket = () => {
+  const addCardBasket = useCallback(() => {
     setModals({
       active: true,
       type: `goBasket`,
       data: modals.data
     });
-    const newCardsBasket = cardsBasket.cards;
-    newCardsBasket.push(modals.data);
-    setCardsBasket({
-      cards: newCardsBasket
-    });
-  };
+    const guitars = getCardsBasket();
+    const newGuitars = addGuitar(guitars, modals.data);
+    setCountGuitars(newGuitars);
+    setCardsBasket(newGuitars);
+  }, [modals.data]);
 
   return (
     <div className="content">
-      <Header />
-      <Switch>
-        <Route exact path='/'>
           <main className="main">
             <BreadCrumbs title={`Каталог гитар`} />
             <div className="main__wrapper">
               <Filters
-                // setFilteredGuitars={setFilteredGuitars}
                 setTypesGuitars={setTypesGuitars}
                 setStringsGuitars={setStringsGuitars}
                 setPriceGuitars={setPriceGuitars}
@@ -188,39 +176,21 @@ const CatalogPage = () => {
             </div>
             {pageButtons}
           </main>
-        </Route>
-        <Route path='/basket'>
-          <main className="main main_basket">
-            <BreadCrumbs title={`Корзина`} />
-            <div className="main__wrapper">
-              <section className="basket">
-                <ul className="basket__list">
-                  {
-                    cardsBasket.cards.map((card) => {
-                      return (
-                        <BasketCard key={card.article} card={card} />
-                      )
-                    })
-                  }
-                </ul>
-                <Ordering />
-              </section>
-            </div>
-          </main>
-        </Route>
-      </Switch>
-      <Footer />
 
       <ModalsContainer
         status={modals.active}
         data={modals.data}
         type={modals.type}
-        closePopup={closePopupAddBasket}
-        addCardInBasket={addCardInBasket}
+        closePopup={closePopup}
+        addCardInBasket={addCardBasket}
       />
 
     </div>
   )
 };
+
+CatalogPage.propTypes = {
+  setCountGuitars: PropTypes.func
+}
 
 export default CatalogPage;

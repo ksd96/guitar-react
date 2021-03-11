@@ -1,6 +1,5 @@
 {
   "name": "guitar-react",
-  "homepage": "https://ksd96.github.io/guitar-react/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

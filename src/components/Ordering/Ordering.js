@@ -1,4 +1,8 @@
-const Ordering = () => {
+import PropTypes from 'prop-types';
+
+const Ordering = ({
+  allPrice
+}) => {
   return (
     <div className="basket__ordering">
       <div className="basket__promo-wrapper">
@@ -11,11 +15,15 @@ const Ordering = () => {
         </form>
       </div>
       <div className="basket__checkout-wrapper">
-        <p className="basket__price">Всего: <span className="basket__all-price"></span> ₽</p>
+        <p className="basket__price">Всего: <span className="basket__all-price">{allPrice}</span> ₽</p>
         <a href="#" className="basket__checkout">Оформить заказ</a>
       </div>
     </div>
   )
+};
+
+Ordering.propTypes = {
+  allPrice: PropTypes.number
 }
 
 export default Ordering;
