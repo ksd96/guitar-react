@@ -1,10 +1,29 @@
 import PropTypes from 'prop-types';
+import { useEffect } from 'react';
 
 const PopupDeleteCard = ({
   data,
   closePopup,
   deleteCard
 }) => {
+
+  useEffect(() => {
+    const page = document.querySelector(`.page`);
+    const button = document.querySelector(`.popup__button_type_delete`);
+    const closeEsc = (event) => {
+      if (event.key === `Escape`) {
+        closePopup();
+      }
+    }
+    window.addEventListener(`keydown`, closeEsc);
+    page.classList.add(`page_no-scrole`);
+    button.focus();
+    return () => {
+      page.classList.remove(`page_no-scrole`);
+      window.removeEventListener(`keydown`, closeEsc);
+    };
+  });
+
   return (
     <div className="popup popup_basket">
       <h2 className="popup__title">Удалить этот товар?</h2>

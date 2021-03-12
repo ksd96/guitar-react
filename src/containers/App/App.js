@@ -2,7 +2,6 @@ import { Switch, Route } from 'react-router-dom';
 import React, { useState } from 'react';
 
 import './styles/App.scss';
-import './fonts/fonts.scss';
 
 import Header from '../../components/Header/Header.js';
 import Footer from '../../components/Footer/Footer.js';
@@ -21,10 +20,10 @@ const App = () => {
     <div className="App">
       <Header count={count} />
       <Switch>
-        <Route exact path='/'>
+        <Route exact path="/">
           <CatalogPage setCountGuitars={setCountGuitars} />
         </Route>
-        <Route path="/basket">
+        <Route  path="/basket">
           <BasketPage setCountGuitars={setCountGuitars} />
         </Route>
       </Switch>

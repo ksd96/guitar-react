@@ -14,7 +14,7 @@ const Header = ({count}) => {
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item">
-                <a href="#" className="header__nav-link">Каталог</a>
+                <Link to="/" className="header__nav-link">Каталог</Link>
               </li>
               <li className="header__nav-item">
                 <a href="#" className="header__nav-link">Где купить?</a>

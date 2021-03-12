@@ -1,8 +1,10 @@
 import classNames from 'classnames/bind';
-import PopupAddBasket from '../PopupAddBasket/PopupAddBasket.js';
-import PopupGoBasket from '../PopupGoBasket/PopupGoBasket.js';
-import PopupDeleteCard from '../PopupDeleteCard/PopupDeleteCard.js';
+import PopupAddBasket from '../Modals/PopupAddBasket/PopupAddBasket.js';
+import PopupGoBasket from '../Modals/PopupGoBasket/PopupGoBasket.js';
+import PopupDeleteCard from '../Modals/PopupDeleteCard/PopupDeleteCard.js';
+import PopupCode from '../Modals/PopupCode/PopupCode.js';
 import PropTypes from 'prop-types';
+import { useEffect } from 'react';
 
 import './styles/overlay.scss';
 
@@ -27,12 +29,14 @@ const ModalsContainer = ({
     popup = <PopupGoBasket closePopup={closePopup} />;
   } else if (status === true && type === `deleteCard`) {
     popup = <PopupDeleteCard data={data} closePopup={closePopup} deleteCard={deleteCard} />
+  } else if (status === true && type === `promo`) {
+    popup = <PopupCode text={data} closePopup={closePopup} />
   } else {
     popup = null;
   };
 
   return (
-    <div className={classContainer}>
+    <div onClick={(evt) => {if (evt.target === evt.currentTarget){closePopup()}}} className={classContainer}>
       {popup}
     </div>
   );

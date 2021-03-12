@@ -1,9 +1,9 @@
 import React, { useState, useReducer, useEffect, useMemo, useCallback } from 'react';
 import {getAllPages, getFilteredCards, getInitialFilters} from '../../data/utils/utils.js';
-import CardsList from '../../components/CardsList/CardsList.js';
+import CardsList from '../../components/CatalogPage/CardsList/CardsList.js';
 import Pages from '../../components/Pages/Pages.js';
-import Sorting from '../../components/Sorting/Sorting.js';
-import Filters from '../../components/Filters/Filters.js';
+import Sorting from '../../components/CatalogPage/Sorting/Sorting.js';
+import Filters from '../../components/CatalogPage/Filters/Filters.js';
 import BreadCrumbs from '../../components/BreadCrumbs/BreadCrumbs.js';
 import ModalsContainer from '../../components/ModalsContainer/ModalsContainer.js';
 import { addGuitar, getCardsBasket, setCardsBasket } from '../../data/utils/utils-basket.js'
@@ -152,7 +152,7 @@ const CatalogPage = ({setCountGuitars}) => {
   return (
     <div className="content">
           <main className="main">
-            <BreadCrumbs title={`Каталог гитар`} />
+            <BreadCrumbs title={`Каталог гитар`} items={[{name: `Главная`, link: `#`}]} active={`Каталог`} />
             <div className="main__wrapper">
               <Filters
                 setTypesGuitars={setTypesGuitars}

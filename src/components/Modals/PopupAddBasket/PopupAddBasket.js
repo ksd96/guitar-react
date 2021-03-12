@@ -1,5 +1,5 @@
 import './styles/popup.scss';
-
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const PopupAddBasket = ({
@@ -7,6 +7,23 @@ const PopupAddBasket = ({
   closePopup,
   addCardInBasket
 }) => {
+
+  useEffect(() => {
+    const page = document.querySelector(`.page`);
+    const button = document.querySelector(`.popup__button`);
+    const closeEsc = (event) => {
+      if (event.key === `Escape`) {
+        closePopup();
+      }
+    }
+    window.addEventListener(`keydown`, closeEsc);
+    page.classList.add(`page_no-scrole`);
+    button.focus();
+    return () => {
+      page.classList.remove(`page_no-scrole`);
+      window.removeEventListener(`keydown`, closeEsc);
+    };
+  });
 
   return (
     <div className="popup">

@@ -1,6 +1,6 @@
-import Ordering from '../../components/Ordering/Ordering.js';
+import Ordering from '../../components/BasketPage/Ordering/Ordering.js';
 import BreadCrumbs from '../../components/BreadCrumbs/BreadCrumbs.js';
-import BasketCard from '../../components/BasketCard/BasketCard.js';
+import BasketCard from '../../components/BasketPage/BasketCard/BasketCard.js';
 import ModalsContainer from '../../components/ModalsContainer/ModalsContainer.js';
 
 import React, { useReducer, useEffect, useState, useCallback } from 'react';
@@ -84,9 +84,17 @@ const BasketPage = ({setCountGuitars}) => {
     })
   }, [modals.data]);
 
+  const openPopupCode = useCallback((text) => {
+    setModals({
+      active: true,
+      type: `promo`,
+      data: `${text}`
+    })
+  }, [modals.data]);
+
   return (
     <main className="main main_basket">
-      <BreadCrumbs title={`Корзина`} />
+      <BreadCrumbs title={`Корзина`} items={[{name: `Главная`, link: `#`}, {name: `Каталог`, link: `/`}]} active={`Оформляем`} />
       <div className="main__wrapper">
         <section className="basket">
           <ul className="basket__list">
@@ -98,7 +106,7 @@ const BasketPage = ({setCountGuitars}) => {
               })
             }
           </ul>
-          <Ordering allPrice={state.allPrice} />
+          <Ordering openPopupCode={openPopupCode} allPrice={state.allPrice} />
         </section>
       </div>
       <ModalsContainer

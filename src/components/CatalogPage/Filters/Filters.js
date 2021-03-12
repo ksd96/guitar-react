@@ -1,7 +1,7 @@
 import './styles/filter.scss';
 import PropTypes from 'prop-types';
 import FilterTypeItem from '../FilterTypeItem/FilterTypeItem.js';
-import {getStringsGuitarArray, getFilteredGuitarsStrings, getFilteredGuitarsTypes, getTypesGuitarArray} from '../../data/utils/utils.js';
+import {getStringsGuitarArray, getFilteredGuitarsStrings, getFilteredGuitarsTypes, getTypesGuitarArray} from '../../../data/utils/utils.js';
 
 const Filters = ({
   setTypesGuitars,
