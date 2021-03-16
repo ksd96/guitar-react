@@ -33,7 +33,12 @@ const Card = ({
 };
 
 Card.propTypes = {
-  guitar: PropTypes.object,
+  guitar: PropTypes.shape({
+    img: PropTypes.string,
+    popularity: PropTypes.number,
+    name: PropTypes.string,
+    price: PropTypes.number
+  }),
   openPopupAddBasket: PropTypes.func
 }
 

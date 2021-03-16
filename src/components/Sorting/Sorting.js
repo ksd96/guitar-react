@@ -1,32 +1,12 @@
 import './styles/sort.scss';
 import PropTypes from 'prop-types';
-import classNames from 'classnames/bind';
 
 const Sortinng = ({
   sortActive,
   sortType,
-  filters
+  addClassType,
+  addClassActive
 }) => {
-
-  const addClassActive = (value) => {
-    const classButton = classNames({
-      "sort__button-type": true,
-      "sort__button-type_type_price": `price` === `${value}`,
-      "sort__button-type_type_popularity": `popularity` === `${value}`,
-      "sort__button-type_active": filters.sortActive === `${value}` && filters.sortState === true
-    });
-    return classButton;
-  }
-
-  const addClassType = (value) => {
-    const classButton = classNames({
-      "sort__button": true,
-      "sort__button_type_min": `min` === `${value}`,
-      "sort__button_type_max": `max` === `${value}`,
-      "sort__button_active": filters.sortType === `${value}` && filters.sortState === true
-    });
-    return classButton;
-  }
 
   return (
     <section className="sort">
@@ -50,7 +30,8 @@ const Sortinng = ({
 Sortinng.propTypes = {
   sortActive: PropTypes.func,
   sortType: PropTypes.func,
-  filters: PropTypes.object
+  addClassType: PropTypes.func,
+  addClassActive: PropTypes.func
 }
 
 export default Sortinng;

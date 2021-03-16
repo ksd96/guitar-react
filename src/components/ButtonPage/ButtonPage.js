@@ -10,7 +10,7 @@ const ButtonPage = ({
   const classButton = classNames({
     "pages__button": true,
     "pages__button_active": activePage === page
-  })
+  });
 
   return (
     <li className="pages__item">

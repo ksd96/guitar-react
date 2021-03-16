@@ -12,7 +12,7 @@ const reducerBasket = (state, action) => {
         allPrice: action.payload.price
       };
     default:
-      throw new Error();
+      return state;
     }
 };
 

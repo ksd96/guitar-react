@@ -50,7 +50,14 @@ const PopupAddBasket = ({
 };
 
 PopupAddBasket.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.shape({
+    img: PropTypes.string,
+    strings: PropTypes.number,
+    name: PropTypes.string,
+    price: PropTypes.number,
+    article: PropTypes.string,
+    type: PropTypes.string,
+  }),
   closePopup: PropTypes.func,
   addCardInBasket: PropTypes.func
 }

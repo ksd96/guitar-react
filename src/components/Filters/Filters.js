@@ -1,7 +1,8 @@
 import './styles/filter.scss';
+import { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import FilterTypeItem from '../FilterTypeItem/FilterTypeItem.js';
-import {getStringsGuitarArray, getFilteredGuitarsStrings, getFilteredGuitarsTypes, getTypesGuitarArray} from '../../../data/utils/utils.js';
+import {getStringsGuitarArray, getFilteredGuitarsStrings, getFilteredGuitarsTypes, getTypesGuitarArray} from '../../data/utils/utils.js';
 
 const Filters = ({
   setTypesGuitars,
@@ -11,7 +12,7 @@ const Filters = ({
   cards
 }) => {
   // получение активных фильтров
-  const getFilteredGuitars = () => {
+  const getFilteredGuitars = useCallback(() => {
     const priceMin = document.querySelector(`.filter__price-input_type_min`);
     const priceMax = document.querySelector(`.filter__price-input_type_max`);
     const filtersTypes = document.querySelectorAll(`[name="types"]`);
@@ -40,10 +41,10 @@ const Filters = ({
       }
     });
     return filterData;
-  }
+  }, []);
 
   // смена минимальной цены
-  const onChangePriceMin = () => {
+  const onChangePriceMin = useCallback(() => {
     const priceMin = document.querySelector(`.filter__price-input_type_min`);
     const priceMax = document.querySelector(`.filter__price-input_type_max`);
     if (+priceMin.value < +allFilters.price.min) {
@@ -54,10 +55,10 @@ const Filters = ({
     setPriceGuitars(getFilteredGuitars().price);
     clickFilterItemTypes(getFilteredGuitars());
     clickFilterItemStrings(getFilteredGuitars());
-  }
+  }, []);
 
   // смена максимальной цены
-  const onChangePriceMax = () => {
+  const onChangePriceMax = useCallback(() => {
     const priceMin = document.querySelector(`.filter__price-input_type_min`);
     const priceMax = document.querySelector(`.filter__price-input_type_max`);
     if (+priceMax.value <= +priceMin.value) {
@@ -66,10 +67,10 @@ const Filters = ({
     setPriceGuitars(getFilteredGuitars().price);
     clickFilterItemTypes(getFilteredGuitars());
     clickFilterItemStrings(getFilteredGuitars());
-  }
+  }, []);
 
   // валидация фильтра по типу гитар
-  const clickFilterItemTypes = (filters) => {
+  const clickFilterItemTypes = useCallback((filters) => {
     const typeGuitars = getTypesGuitarArray(getFilteredGuitarsStrings(cards, filters));
     const typeGuitarsAll = document.querySelectorAll(`[name="types"]`);
 
@@ -83,10 +84,10 @@ const Filters = ({
         }
       });
     });
-  }
+  }, []);
 
       // валидация фильтра по количеству струн
-  const clickFilterItemStrings = (filters) => {
+  const clickFilterItemStrings = useCallback((filters) => {
     const typeGuitars = getStringsGuitarArray(getFilteredGuitarsTypes(cards, filters));
     const typeGuitarsAll = document.querySelectorAll(`[name="strings"]`);
     typeGuitarsAll.forEach((item) => {
@@ -99,7 +100,7 @@ const Filters = ({
         }
       });
     });
-  }
+  }, []);
 
   return (
     <section className="filters">

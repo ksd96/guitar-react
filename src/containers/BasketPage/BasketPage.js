@@ -1,6 +1,6 @@
-import Ordering from '../../components/BasketPage/Ordering/Ordering.js';
+import Ordering from '../../components/Ordering/Ordering.js';
 import BreadCrumbs from '../../components/BreadCrumbs/BreadCrumbs.js';
-import BasketCard from '../../components/BasketPage/BasketCard/BasketCard.js';
+import BasketCard from '../../components/BasketCard/BasketCard.js';
 import ModalsContainer from '../../components/ModalsContainer/ModalsContainer.js';
 
 import React, { useReducer, useEffect, useState, useCallback } from 'react';

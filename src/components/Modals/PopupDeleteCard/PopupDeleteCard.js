@@ -52,7 +52,13 @@ const PopupDeleteCard = ({
 };
 
 PopupDeleteCard.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.shape({
+    img: PropTypes.string,
+    name: PropTypes.string,
+    price: PropTypes.number,
+    article: PropTypes.string,
+    type: PropTypes.string
+  }),
   closePopup: PropTypes.func,
   deleteCard: PropTypes.func
 }

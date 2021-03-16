@@ -26,7 +26,9 @@ const BreadCrumbs = ({
 };
 
 BreadCrumbs.propTypes = {
-  title: PropTypes.string
+  title: PropTypes.string,
+  items: PropTypes.array,
+  activer: PropTypes.string
 }
 
 export default BreadCrumbs;

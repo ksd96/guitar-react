@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import promoCodes from '../../../promo/promo-codes.js';
-import React, { useState, useEffect } from 'react';
+import promoCodes from '../../promo/promo-codes.js';
+import { useState, useEffect, useCallback } from 'react';
 
 const Ordering = ({
   allPrice,
@@ -16,7 +16,7 @@ const Ordering = ({
     setStateCode(`${String(evt.target.value).toUpperCase()}`);
   }
 
-  const codeCheck = (evt) => {
+  const codeCheck = useCallback((evt) => {
     evt.preventDefault();
     if (Object.keys(promoCodes).includes(stateCode)) {
       setState(promoCodes[stateCode](state));
@@ -30,7 +30,7 @@ const Ordering = ({
     } else {
       openPopupCode(`Промокод недействителен`);
     }
-  }
+  }, [openPopupCode]);
 
   return (
     <div className="basket__ordering">

@@ -1,3 +1,4 @@
+// получить отфильтрованные карточки
 const getFilteredCards = (filters, state) => {
   // фильтрует по типу
   const filteringByType = (cards, types) => {
@@ -69,6 +70,7 @@ const getFilteredCards = (filters, state) => {
     return guitars;
   }
 
+  // возвращает отфильтрованные карточки
   const getFilteredGuitars = () => {
     let filteredCards = state;
     filteredCards = filteringByType(filteredCards, filters.type);
@@ -83,17 +85,19 @@ const getFilteredCards = (filters, state) => {
   }
 
   return getFilteredGuitars();
-}
+};
 
+// получить типы карточек из определенного массива
 const getTypesGuitarArray = (array) => {
   const types = array.map((guitar) => guitar.type);
   return new Set(types);
-}
+};
 
+// получить типы карточек по колличеству струн из определенного массива
 const getStringsGuitarArray = (array) => {
   const strings = array.map((guitar) => guitar.strings);
   return new Set(strings);
-}
+};
 
 // фильтрует по типу
 const filteringByType = (cards, types) => {
@@ -110,9 +114,9 @@ const filteringByType = (cards, types) => {
     });
     return guitars;
   }
-}
+};
 
-// фильтрует по колличеству струн
+// фильтрует по количеству струн
 const filteringByStrings = (cards, strings) => {
   if (strings.length === 0) {
     return Object.values(cards);
@@ -127,27 +131,29 @@ const filteringByStrings = (cards, strings) => {
     });
     return guitars;
   }
-}
+};
 
 // фильтрует по цене
 const filteringByPrice = (cards, minPrice, maxPrice) => {
   const guitars = Object.values(cards).filter((guitar) => guitar.price >= minPrice && guitar.price <= maxPrice);
   return guitars;
-}
+};
 
+// получить отфильтрованные карточки по типу
 const getFilteredGuitarsTypes = (cards, filters) => {
   let filteredCards = cards;
   filteredCards = filteringByType(filteredCards, filters.type);
   filteredCards = filteringByPrice(filteredCards, filters.price.min, filters.price.max);
   return filteredCards;
-}
+};
 
+// получить отфильтрованные карточки по количеству струн
 const getFilteredGuitarsStrings = (cards, filters) => {
   let filteredCards = cards;
   filteredCards = filteringByStrings(filteredCards, filters.strings);
   filteredCards = filteringByPrice(filteredCards, filters.price.min, filters.price.max);
   return filteredCards;
-}
+};
 
 // получение количетва страниц
 const getAllPages = (cards) => {
@@ -156,8 +162,9 @@ const getAllPages = (cards) => {
     pages.push(i);
   }
   return pages;
-}
+};
 
+// получить начальное состояние стора
 const getInitialFilters = (guitars) => {
   // отдает существующие типы гитар
   const getTypesGuitar = () => {
@@ -211,8 +218,6 @@ const getInitialFilters = (guitars) => {
   }
 
   return getFiltersValue();
-}
-
+};
 
 export {getInitialFilters, getFilteredCards, getStringsGuitarArray, getTypesGuitarArray, getFilteredGuitarsStrings, getFilteredGuitarsTypes, getAllPages};
-

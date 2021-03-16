@@ -1,117 +1,26 @@
-import React, { useState, useReducer, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useReducer, useMemo, useCallback } from 'react';
 import {getAllPages, getFilteredCards, getInitialFilters} from '../../data/utils/utils.js';
-import CardsList from '../../components/CatalogPage/CardsList/CardsList.js';
-import Pages from '../../components/Pages/Pages.js';
-import Sorting from '../../components/CatalogPage/Sorting/Sorting.js';
-import Filters from '../../components/CatalogPage/Filters/Filters.js';
+import CardsList from '../../components/CardsList/CardsList.js';
+import SortingContainer from '../SortingContainer/SortingContainer.js';
+import FiltersContainer from '../FiltersContainer/FiltersContainer.js';
 import BreadCrumbs from '../../components/BreadCrumbs/BreadCrumbs.js';
 import ModalsContainer from '../../components/ModalsContainer/ModalsContainer.js';
 import { addGuitar, getCardsBasket, setCardsBasket } from '../../data/utils/utils-basket.js'
-import reducerCatalog from '../../reducers/reducerCatalog.js';
+// import { addGuitar } from '../../store/selectors/selectorsBasket.js';
 import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from "react-redux";
+import PaginationContainer from '../PaginationContainer/PaginationContainer.js';
+import { actionsBasket } from '../../store/actions/actionsBasket.js';
 
 import './styles/main/main.scss';
 import './styles/cards/cards.scss';
 import './styles/pages/pages.scss';
 
-const data = require('../../data/data.json');
-
 const CatalogPage = ({setCountGuitars}) => {
-  const allFilters = getInitialFilters(data.guitars);
-  const [filters, dispatch] = useReducer(reducerCatalog, allFilters);
-
-  const cardsToRender = useMemo(() => {
-    return getFilteredCards(filters, filters.cards);
-  }, [filters, filters.cards]);
-
-  // изменения карточек гитар
-  const setCards = useCallback((cards) => {
-    const action = {
-      type: `CHANGE_CARDS`,
-      payload: cards
-    };
-    dispatch(action);
-  }, [data.guitars]);
-
-  // получить следующую страницу
-  const getNextPage = useCallback(() => {
-    const action = {
-      type: `CHANGE_PAGE`,
-      payload: filters.pageNumber + 1
-    };
-    if(filters.pageNumber < (cardsToRender.length / 9)) {
-      dispatch(action);
-    };
-  }, [filters.pageNumber]);
-
-  // получить определенную страницу
-  const getPage = useCallback((pageNumber) => {
-    const action = {
-      type: `CHANGE_PAGE`,
-      payload: pageNumber
-    };
-    dispatch(action);
-  }, [filters.pageNumber]);
-
- // сортировака по цене или популярности
-  const sortActive = useCallback((type) => {
-    const action = {
-      type: `CHANGE_ACTIVE_SORT`,
-      payload: `${type}`
-    };
-    dispatch(action);
-  }, [filters.sortActive]);
-
-  // сортировка от меньшего к большему или наоборот
-  const sortType = useCallback((type) => {
-    const action = {
-      type: `CHANGE_TYPE_SORT`,
-      payload: `${type}`
-    };
-    dispatch(action);
-  }, [filters.sortType]);
-
-  // изменение фильтов по типу гитары
-  const setTypesGuitars = useCallback((newFilters) => {
-    const action = {
-      type: `CHANGE_FILTERS_TYPE`,
-      payload: newFilters
-    };
-    dispatch(action);
-  }, [filters.type]);
-
-  // изменение фильтов по колличеству струн
-  const setStringsGuitars = useCallback((newFilters) => {
-    const action = {
-      type: `CHANGE_FILTERS_STRINGS`,
-      payload: newFilters
-    };
-    dispatch(action);
-  }, [filters.strings]);
-
-  // изменение фильтов по цене
-  const setPriceGuitars = useCallback((newFilters) => {
-    const action = {
-      type: `CHANGE_FILTERS_PRICE`,
-      payload: newFilters
-    };
-    dispatch(action);
-  }, [filters.price]);
-
-
-  const pageCards = cardsToRender.slice((9 * filters.pageNumber) - 9, 9 * filters.pageNumber);
-
-  let pageButtons;
-  if (getAllPages(cardsToRender).length > 1) {
-    pageButtons = <Pages
-      getNextPage={getNextPage}
-      pages={getAllPages(cardsToRender)}
-      activePage={filters.pageNumber}
-      getPage={getPage}
-    />
-  } else {
-    pageButtons = null;
-  }
+  const filters = useSelector((state) => state.catalog);
+  const catalogCards = useSelector((state) => getFilteredCards(state.catalog, state.catalog.cards));
+  const pageCards = catalogCards.slice((9 * filters.pageNumber) - 9, 9 * filters.pageNumber);
+  const dispatch = useDispatch();
 
   // модальные окна ----------------------------------------------------------------------------------------------------
 
@@ -137,6 +46,23 @@ const CatalogPage = ({setCountGuitars}) => {
     })
   }, [modals.data]);
 
+  // добавление гитары в корзину
+  // const basket = useSelector((state) => state.basket);
+  // console.log(basket);
+  // const addCardBasket = useCallback(() => {
+  //   setModals({
+  //     active: true,
+  //     type: `goBasket`,
+  //     data: modals.data
+  //   });
+  //   // const guitars = getCardsBasket();
+  //   dispatch(actionsBasket.changeCards(addGuitar(basket, modals.data.article)))
+  //   // const newGuitars = addGuitar(guitars, modals.data);
+  //   // setCountGuitars(newGuitars);
+  //   // setCardsBasket(newGuitars);
+  //   console.log(basket);
+  // }, [modals.data]);
+
   const addCardBasket = useCallback(() => {
     setModals({
       active: true,
@@ -154,27 +80,16 @@ const CatalogPage = ({setCountGuitars}) => {
           <main className="main">
             <BreadCrumbs title={`Каталог гитар`} items={[{name: `Главная`, link: `#`}]} active={`Каталог`} />
             <div className="main__wrapper">
-              <Filters
-                setTypesGuitars={setTypesGuitars}
-                setStringsGuitars={setStringsGuitars}
-                setPriceGuitars={setPriceGuitars}
-                allFilters={allFilters}
-                filters={filters}
-                cards={filters.cards}
-              />
+              <FiltersContainer />
               <div className="main__wrapper-right">
-                <Sorting
-                  sortActive={sortActive}
-                  sortType={sortType}
-                  filters={filters}
-                />
+                <SortingContainer />
                 <CardsList
                   guitars={pageCards}
                   openPopupAddBasket={openPopupAddBasket}
                 />
               </div>
             </div>
-            {pageButtons}
+            <PaginationContainer />
           </main>
 
       <ModalsContainer

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import './styles/guitar.scss';
+import { useCallback } from 'react';
 
 const BasketCard = ({
   card,
@@ -8,13 +9,13 @@ const BasketCard = ({
   openPopupDelete
 }) => {
 
-  const deleteGuitar = () => {
+  const deleteGuitar = useCallback (() => {
     if(card.count === 1) {
       openPopupDelete();
     } else {
       deleteCard(card, false);
     }
-  }
+  }, [card]);
 
   return (
     <li className="basket__item guitar">
@@ -43,7 +44,15 @@ const BasketCard = ({
 }
 
 BasketCard.propTypes = {
-  card: PropTypes.object,
+  card: PropTypes.shape({
+    img: PropTypes.string,
+    strings: PropTypes.number,
+    name: PropTypes.string,
+    price: PropTypes.number,
+    article: PropTypes.string,
+    type: PropTypes.string,
+    count: PropTypes.number
+  }),
   addCard: PropTypes.func,
   deleteCard: PropTypes.func,
   openPopupDelete: PropTypes.func
