@@ -1,8 +1,10 @@
+import { useCallback } from 'react';
 import { useSelector, useDispatch } from "react-redux";
+
+import Pages from '../../components/Pages/Pages.js';
+
 import { actionsCatalog } from '../../store/actions/actionsCatalog.js';
 import { getAllPages, getFilteredCards } from '../../store/selectors/selectorsCatalog.js';
-import Pages from '../../components/Pages/Pages.js';
-import React, { useCallback } from 'react';
 
 const PaginationContainer = () => {
   const filters = useSelector((state) => state.catalog);

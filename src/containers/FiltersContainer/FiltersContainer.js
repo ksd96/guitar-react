@@ -1,8 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
-import { actionsCatalog } from '../../store/actions/actionsCatalog.js';
 import React, { useCallback } from 'react';
-import initialState from '../../store/initialStates/initialState.js';
+
 import Filters from '../../components/Filters/Filters.js';
+
+import { actionsCatalog } from '../../store/actions/actionsCatalog.js';
+import initialState from '../../store/initialStates/initialState.js';
 
 const FiltersContainer = () => {
   const allFilters = initialState.catalog;

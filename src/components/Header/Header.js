@@ -1,9 +1,9 @@
 import './styles/header.scss';
-
+import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
-const Header = ({count}) => {
+const Header = () => {
+  const count = useSelector((state) => state.basket.count);
   return (
     <header className="header">
       <div className="header__wrapper-top">
@@ -57,10 +57,6 @@ const Header = ({count}) => {
     </header>
   )
 };
-
-Header.propTypes = {
-  count: PropTypes.number
-}
 
 export default Header;
 

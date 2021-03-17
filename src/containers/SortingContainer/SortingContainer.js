@@ -1,8 +1,10 @@
 import classNames from 'classnames/bind';
 import { useSelector, useDispatch } from "react-redux";
-import { actionsCatalog } from '../../store/actions/actionsCatalog.js';
 import React, { useCallback } from 'react';
+
 import Sorting from '../../components/Sorting/Sorting.js';
+
+import { actionsCatalog } from '../../store/actions/actionsCatalog.js';
 
 const SortingContainer = () => {
   const filters = useSelector((state) => state.catalog);

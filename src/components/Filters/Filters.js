@@ -2,7 +2,7 @@ import './styles/filter.scss';
 import { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import FilterTypeItem from '../FilterTypeItem/FilterTypeItem.js';
-import {getStringsGuitarArray, getFilteredGuitarsStrings, getFilteredGuitarsTypes, getTypesGuitarArray} from '../../data/utils/utils.js';
+import {getStringsGuitarArray, getFilteredGuitarsStrings, getFilteredGuitarsTypes, getTypesGuitarArray} from '../../store/selectors/selectorsCatalog.js';
 
 const Filters = ({
   setTypesGuitars,

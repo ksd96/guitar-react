@@ -1,62 +1,46 @@
-import Ordering from '../../components/Ordering/Ordering.js';
+import React, { useState, useCallback } from 'react';
+import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from "react-redux";
+
+import OrderingContainer from '../OrderingContainer/OrderingContainer.js';
 import BreadCrumbs from '../../components/BreadCrumbs/BreadCrumbs.js';
 import BasketCard from '../../components/BasketCard/BasketCard.js';
-import ModalsContainer from '../../components/ModalsContainer/ModalsContainer.js';
+import ModalsContainer from '../ModalsContainer/ModalsContainer.js';
 
-import React, { useReducer, useEffect, useState, useCallback } from 'react';
-import PropTypes from 'prop-types';
-import { addGuitar, getCardsBasket, deleteGuitar, setCardsBasket, getAllPrice } from '../../data/utils/utils-basket.js';
-import { initStateBasket, reducerBasket } from '../../reducers/reducesBasket.js';
+import { actionsBasket } from '../../store/actions/actionsBasket.js';
+import { addGuitar, deleteGuitar } from '../../store/selectors/selectorsBasket.js';
 
 import './styles/basket/basket.scss';
 
-if (localStorage.getItem(`guitarsBasket`) === null) {
-  localStorage.setItem(`guitarsBasket`, JSON.stringify({data: {}}));
-}
+// if (localStorage.getItem(`guitarsBasket`) === null) {
+//   localStorage.setItem(`guitarsBasket`, JSON.stringify({data: {}}));
+// }
 
-const BasketPage = ({setCountGuitars}) => {
-  const [state, dispatch] = useReducer(reducerBasket, initStateBasket);
+const BasketPage = () => {
+  const state = useSelector((state) => state.basket);
+  const stateCatalog = useSelector((state) => state.catalog);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-      const action = {
-        type: `CHANGE_CARDS`,
-        payload: {
-          cards: getCardsBasket(),
-          price: getAllPrice(getCardsBasket())
-        }
+  const getCardsBasket = useCallback(() => {
+    const cards = [];
+    Object.values(state.cards).map((item) => {
+      if (stateCatalog.cards[item.article]) {
+        stateCatalog.cards[item.article].count = item.count;
+        cards.push(stateCatalog.cards[item.article]);
       };
-      dispatch(action);
-  }, []);
+    });
+    return cards;
+  }, [state]);
 
   const addCard = useCallback((newCard) => {
-    const newCards = addGuitar(state.cards, newCard);
-    const action = {
-      type: `CHANGE_CARDS`,
-      payload: {
-        cards: newCards,
-        price: getAllPrice(newCards)
-      }
-    };
-    setCountGuitars(state.cards);
-    dispatch(action);
-    setCardsBasket(newCards);
+    dispatch(actionsBasket.changeCards(addGuitar(state, newCard.article)));
   }, [state.cards]);
 
   const deleteCard = useCallback((card, type) => {
     if (type === false && card.count === 1) {
       openPopupDelete(card);
     } else {
-      const newCards = deleteGuitar(card.article, type, state.cards);
-      const action = {
-        type: `CHANGE_CARDS`,
-        payload: {
-          cards: newCards,
-          price: getAllPrice(newCards)
-        }
-      };
-      setCountGuitars(state.cards);
-      dispatch(action);
-      setCardsBasket(newCards);
+      dispatch(actionsBasket.changeCards(deleteGuitar(card.article, type, state)));
     }
   }, [state.cards]);
 
@@ -88,7 +72,7 @@ const BasketPage = ({setCountGuitars}) => {
     setModals({
       active: true,
       type: `promo`,
-      data: `${text}`
+      data: text
     })
   }, [modals.data]);
 
@@ -99,14 +83,14 @@ const BasketPage = ({setCountGuitars}) => {
         <section className="basket">
           <ul className="basket__list">
             {
-              state.cards && Object.values(state.cards).map((card) => {
+              state.cards && getCardsBasket().map((card) => {
                 return (
                   <BasketCard openPopupDelete={() => openPopupDelete(card)} addCard={addCard} deleteCard={deleteCard} key={card.article} card={card} />
                 )
               })
             }
           </ul>
-          <Ordering openPopupCode={openPopupCode} allPrice={state.allPrice} />
+          <OrderingContainer cards={getCardsBasket()} openPopupCode={openPopupCode} />
         </section>
       </div>
       <ModalsContainer
@@ -122,6 +106,6 @@ const BasketPage = ({setCountGuitars}) => {
 
 BasketPage.propTypes = {
   setCountGuitars: PropTypes.func
-}
+};
 
 export default BasketPage;

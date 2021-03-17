@@ -1,6 +1,6 @@
 const initialStateBasket = {
   cards: {},
-  count: 0
+  count: null
 }
 
 export default initialStateBasket;

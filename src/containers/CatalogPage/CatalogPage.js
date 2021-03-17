@@ -1,22 +1,22 @@
-import React, { useState, useReducer, useMemo, useCallback } from 'react';
-import {getAllPages, getFilteredCards, getInitialFilters} from '../../data/utils/utils.js';
+import React, { useState, useCallback } from 'react';
+import { useSelector, useDispatch } from "react-redux";
+
 import CardsList from '../../components/CardsList/CardsList.js';
 import SortingContainer from '../SortingContainer/SortingContainer.js';
 import FiltersContainer from '../FiltersContainer/FiltersContainer.js';
 import BreadCrumbs from '../../components/BreadCrumbs/BreadCrumbs.js';
-import ModalsContainer from '../../components/ModalsContainer/ModalsContainer.js';
-import { addGuitar, getCardsBasket, setCardsBasket } from '../../data/utils/utils-basket.js'
-// import { addGuitar } from '../../store/selectors/selectorsBasket.js';
-import PropTypes from 'prop-types';
-import { useSelector, useDispatch } from "react-redux";
+import ModalsContainer from '../ModalsContainer/ModalsContainer.js';
 import PaginationContainer from '../PaginationContainer/PaginationContainer.js';
+
 import { actionsBasket } from '../../store/actions/actionsBasket.js';
+import { addGuitar } from '../../store/selectors/selectorsBasket.js';
+import { getFilteredCards } from '../../store/selectors/selectorsCatalog.js';
 
 import './styles/main/main.scss';
 import './styles/cards/cards.scss';
 import './styles/pages/pages.scss';
 
-const CatalogPage = ({setCountGuitars}) => {
+const CatalogPage = () => {
   const filters = useSelector((state) => state.catalog);
   const catalogCards = useSelector((state) => getFilteredCards(state.catalog, state.catalog.cards));
   const pageCards = catalogCards.slice((9 * filters.pageNumber) - 9, 9 * filters.pageNumber);
@@ -47,32 +47,14 @@ const CatalogPage = ({setCountGuitars}) => {
   }, [modals.data]);
 
   // добавление гитары в корзину
-  // const basket = useSelector((state) => state.basket);
-  // console.log(basket);
-  // const addCardBasket = useCallback(() => {
-  //   setModals({
-  //     active: true,
-  //     type: `goBasket`,
-  //     data: modals.data
-  //   });
-  //   // const guitars = getCardsBasket();
-  //   dispatch(actionsBasket.changeCards(addGuitar(basket, modals.data.article)))
-  //   // const newGuitars = addGuitar(guitars, modals.data);
-  //   // setCountGuitars(newGuitars);
-  //   // setCardsBasket(newGuitars);
-  //   console.log(basket);
-  // }, [modals.data]);
-
+  const basket = useSelector((state) => state.basket);
   const addCardBasket = useCallback(() => {
     setModals({
       active: true,
       type: `goBasket`,
       data: modals.data
     });
-    const guitars = getCardsBasket();
-    const newGuitars = addGuitar(guitars, modals.data);
-    setCountGuitars(newGuitars);
-    setCardsBasket(newGuitars);
+    dispatch(actionsBasket.changeCards(addGuitar(basket, modals.data.article)))
   }, [modals.data]);
 
   return (
@@ -103,9 +85,5 @@ const CatalogPage = ({setCountGuitars}) => {
     </div>
   )
 };
-
-CatalogPage.propTypes = {
-  setCountGuitars: PropTypes.func
-}
 
 export default CatalogPage;

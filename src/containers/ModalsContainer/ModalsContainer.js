@@ -1,10 +1,10 @@
 import classNames from 'classnames/bind';
-import PopupAddBasket from '../Modals/PopupAddBasket/PopupAddBasket.js';
-import PopupGoBasket from '../Modals/PopupGoBasket/PopupGoBasket.js';
-import PopupDeleteCard from '../Modals/PopupDeleteCard/PopupDeleteCard.js';
-import PopupCode from '../Modals/PopupCode/PopupCode.js';
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
+
+import PopupAddBasket from '../../components/Modals/PopupAddBasket/PopupAddBasket.js';
+import PopupGoBasket from '../../components/Modals/PopupGoBasket/PopupGoBasket.js';
+import PopupDeleteCard from '../../components/Modals/PopupDeleteCard/PopupDeleteCard.js';
+import PopupCode from '../../components/Modals/PopupCode/PopupCode.js';
 
 import './styles/overlay.scss';
 

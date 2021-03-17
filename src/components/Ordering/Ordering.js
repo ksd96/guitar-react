@@ -1,37 +1,10 @@
 import PropTypes from 'prop-types';
-import promoCodes from '../../promo/promo-codes.js';
-import { useState, useEffect, useCallback } from 'react';
 
 const Ordering = ({
   allPrice,
-  openPopupCode
+  changeCode,
+  codeCheck
 }) => {
-  const [state, setState] = useState(0);
-  const [stateCode, setStateCode] = useState(``);
-  useEffect(() => {
-    setState(allPrice)
-  }, [allPrice]);
-
-  const changeCode = (evt) => {
-    setStateCode(`${String(evt.target.value).toUpperCase()}`);
-  }
-
-  const codeCheck = useCallback((evt) => {
-    evt.preventDefault();
-    if (Object.keys(promoCodes).includes(stateCode)) {
-      setState(promoCodes[stateCode](state));
-      console.log(stateCode);
-      console.log()
-      evt.target.disabled = true;
-    } else if (stateCode === ``) {
-      openPopupCode(`Введите промокод`);
-    } else if (stateCode === null) {
-      return;
-    } else {
-      openPopupCode(`Промокод недействителен`);
-    }
-  }, [openPopupCode]);
-
   return (
     <div className="basket__ordering">
       <div className="basket__promo-wrapper">
@@ -44,16 +17,17 @@ const Ordering = ({
         </form>
       </div>
       <div className="basket__checkout-wrapper">
-        <p className="basket__price">Всего: <span className="basket__all-price">{state}</span> ₽</p>
+        <p className="basket__price">Всего: <span className="basket__all-price">{allPrice}</span> ₽</p>
         <a href="#" className="basket__checkout">Оформить заказ</a>
       </div>
     </div>
-  )
+  );
 };
 
 Ordering.propTypes = {
   allPrice: PropTypes.number,
-  openPopupCode: PropTypes.func
+  changeCode: PropTypes.func,
+  codeCheck: PropTypes.func
 }
 
 export default Ordering;
