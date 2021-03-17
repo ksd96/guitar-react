@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/guitar-react/static/css/main.a6b5948d.chunk.css",
-    "main.js": "/guitar-react/static/js/main.a897109c.chunk.js",
-    "main.js.map": "/guitar-react/static/js/main.a897109c.chunk.js.map",
+    "main.css": "/guitar-react/static/css/main.cadaf8d0.chunk.css",
+    "main.js": "/guitar-react/static/js/main.150d141c.chunk.js",
+    "main.js.map": "/guitar-react/static/js/main.150d141c.chunk.js.map",
     "runtime-main.js": "/guitar-react/static/js/runtime-main.41632e60.js",
     "runtime-main.js.map": "/guitar-react/static/js/runtime-main.41632e60.js.map",
-    "static/js/2.16a5100f.chunk.js": "/guitar-react/static/js/2.16a5100f.chunk.js",
-    "static/js/2.16a5100f.chunk.js.map": "/guitar-react/static/js/2.16a5100f.chunk.js.map",
+    "static/js/2.0255d11d.chunk.js": "/guitar-react/static/js/2.0255d11d.chunk.js",
+    "static/js/2.0255d11d.chunk.js.map": "/guitar-react/static/js/2.0255d11d.chunk.js.map",
     "index.html": "/guitar-react/index.html",
-    "static/css/main.a6b5948d.chunk.css.map": "/guitar-react/static/css/main.a6b5948d.chunk.css.map",
-    "static/js/2.16a5100f.chunk.js.LICENSE.txt": "/guitar-react/static/js/2.16a5100f.chunk.js.LICENSE.txt",
+    "static/css/main.cadaf8d0.chunk.css.map": "/guitar-react/static/css/main.cadaf8d0.chunk.css.map",
+    "static/js/2.0255d11d.chunk.js.LICENSE.txt": "/guitar-react/static/js/2.0255d11d.chunk.js.LICENSE.txt",
     "static/media/footer.scss": "/guitar-react/static/media/icon-time.07706131.svg",
     "static/media/filter.scss": "/guitar-react/static/media/icon-check.04199ead.svg",
     "static/media/card.scss": "/guitar-react/static/media/icon-grocery-cart.4e020277.svg",
@@ -18,8 +18,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.41632e60.js",
-    "static/js/2.16a5100f.chunk.js",
-    "static/css/main.a6b5948d.chunk.css",
-    "static/js/main.a897109c.chunk.js"
+    "static/js/2.0255d11d.chunk.js",
+    "static/css/main.cadaf8d0.chunk.css",
+    "static/js/main.150d141c.chunk.js"
   ]
 }
