@@ -9,12 +9,9 @@ import ModalsContainer from '../ModalsContainer/ModalsContainer.js';
 
 import { actionsBasket } from '../../store/actions/actionsBasket.js';
 import { addGuitar, deleteGuitar } from '../../store/selectors/selectorsBasket.js';
+import { popupTypes, pageTitles, activePage, pageLinks } from '../../consts/consts.js';
 
 import './styles/basket/basket.scss';
-
-// if (localStorage.getItem(`guitarsBasket`) === null) {
-//   localStorage.setItem(`guitarsBasket`, JSON.stringify({data: {}}));
-// }
 
 const BasketPage = () => {
   const state = useSelector((state) => state.basket);
@@ -32,27 +29,26 @@ const BasketPage = () => {
     return cards;
   }, [state]);
 
-  const addCard = useCallback((newCard) => {
+  const addCardHandler = useCallback((newCard) => {
     dispatch(actionsBasket.changeCards(addGuitar(state, newCard.article)));
   }, [state.cards]);
 
-  const deleteCard = useCallback((card, type) => {
+  const deleteCardHandler = useCallback((card, type) => {
     if (type === false && card.count === 1) {
-      openPopupDelete(card);
+      openPopupDeleteHandler(card);
     } else {
       dispatch(actionsBasket.changeCards(deleteGuitar(card.article, type, state)));
     }
   }, [state.cards]);
 
   // модальное окно -----------------------------------------------------------------------------------------------
-
   const [modals, setModals] = useState({
     active: false,
     type: null,
     data: null
   });
 
-  const closePopup = useCallback(() => {
+  const closePopupHandler = useCallback(() => {
     setModals({
       active: false,
       type: null,
@@ -60,52 +56,61 @@ const BasketPage = () => {
     })
   }, [modals.data]);
 
-  const openPopupDelete = useCallback((card) => {
+  const openPopupDeleteHandler = useCallback((card) => {
     setModals({
       active: true,
-      type: `deleteCard`,
+      type: popupTypes.DELETE_CARD,
       data: card
     })
   }, [modals.data]);
 
-  const openPopupCode = useCallback((text) => {
+  const openPopupCodeHandler = useCallback((text) => {
     setModals({
       active: true,
-      type: `promo`,
+      type: popupTypes.PROMO,
       data: text
     })
   }, [modals.data]);
 
   return (
     <main className="main main_basket">
-      <BreadCrumbs title={`Корзина`} items={[{name: `Главная`, link: `#`}, {name: `Каталог`, link: `/`}]} active={`Оформляем`} />
+      <BreadCrumbs
+        title={pageTitles.BASKET}
+        items={[pageLinks.HOME, pageLinks.CATALOG]}
+        active={activePage.BASKET}
+      />
       <div className="main__wrapper">
         <section className="basket">
           <ul className="basket__list">
             {
               state.cards && getCardsBasket().map((card) => {
                 return (
-                  <BasketCard openPopupDelete={() => openPopupDelete(card)} addCard={addCard} deleteCard={deleteCard} key={card.article} card={card} />
+                  <BasketCard
+                    onOpenPopupDelete={() => openPopupDeleteHandler(card)}
+                    onAddCard={addCardHandler}
+                    onDeleteCard={deleteCardHandler}
+                    key={card.article}
+                    card={card}
+                  />
                 )
               })
             }
           </ul>
-          <OrderingContainer cards={getCardsBasket()} openPopupCode={openPopupCode} />
+          <OrderingContainer
+            cards={getCardsBasket()}
+            onOpenPopupCode={openPopupCodeHandler}
+          />
         </section>
       </div>
       <ModalsContainer
         status={modals.active}
         data={modals.data}
         type={modals.type}
-        closePopup={closePopup}
-        deleteCard={deleteCard}
+        onClosePopup={closePopupHandler}
+        onDeleteCard={deleteCardHandler}
       />
     </main>
   )
-};
-
-BasketPage.propTypes = {
-  setCountGuitars: PropTypes.func
 };
 
 export default BasketPage;

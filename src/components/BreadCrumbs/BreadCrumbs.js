@@ -27,7 +27,7 @@ const BreadCrumbs = ({
 
 BreadCrumbs.propTypes = {
   title: PropTypes.string,
-  items: PropTypes.array,
+  items: PropTypes.arrayOf(PropTypes.object),
   activer: PropTypes.string
 }
 

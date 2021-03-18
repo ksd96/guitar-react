@@ -4,22 +4,22 @@ import { useCallback } from 'react';
 
 const BasketCard = ({
   card,
-  addCard,
-  deleteCard,
-  openPopupDelete
+  onAddCard,
+  onDeleteCard,
+  onOpenPopupDelete
 }) => {
 
   const deleteGuitar = useCallback (() => {
     if(card.count === 1) {
-      openPopupDelete();
+      onOpenPopupDelete();
     } else {
-      deleteCard(card, false);
+      onDeleteCard(card, false);
     }
   }, [card]);
 
   return (
     <li className="basket__item guitar">
-      <button onClick={openPopupDelete} className="guitar__delete" type="button" aria-label="кнопка удаления гитары">
+      <button onClick={onOpenPopupDelete} className="guitar__delete" type="button" aria-label="кнопка удаления гитары">
         <svg className="guitar__icon" width="11.5" height="11.5"><use xlinkHref="#icon-close"></use></svg>
       </button>
       <picture className="guitar__picture">
@@ -36,7 +36,7 @@ const BasketCard = ({
       <div className="guitar__buttons">
         <button onClick={() => {deleteGuitar()}} className="guitar__button guitar__button_type_less" type="button">-</button>
         <p className="guitar__quantity">{card.count}</p>
-        <button onClick={() => {addCard(card)}} className="guitar__button guitar__button_type_more" type="button">+</button>
+        <button onClick={() => {onAddCard(card)}} className="guitar__button guitar__button_type_more" type="button">+</button>
       </div>
       <p className="guitar__full-price"><span className="guitar__full-price-content">{card.count * card.price}</span> ₽</p>
     </li>
@@ -53,8 +53,8 @@ BasketCard.propTypes = {
     type: PropTypes.string,
     count: PropTypes.number
   }),
-  addCard: PropTypes.func,
-  deleteCard: PropTypes.func,
+  onAddCard: PropTypes.func,
+  onDeleteCard: PropTypes.func,
   openPopupDelete: PropTypes.func
 }
 

@@ -12,27 +12,26 @@ const FiltersContainer = () => {
   const dispatch = useDispatch();
 
   // изменение фильтов по типу гитары
-  const setTypesGuitars = useCallback((newFilters) => {
+  const setTypesGuitarsHandler = useCallback((newFilters) => {
     dispatch(actionsCatalog.changeFiltersType(newFilters));
   }, [filters.type]);
 
   // изменение фильтов по колличеству струн
-  const setStringsGuitars = useCallback((newFilters) => {
+  const setStringsGuitarsHandler = useCallback((newFilters) => {
     dispatch(actionsCatalog.changeFiltersStrings(newFilters));
   }, [filters.strings]);
 
   // изменение фильтов по цене
-  const setPriceGuitars = useCallback((newFilters) => {
+  const setPriceGuitarsHandler = useCallback((newFilters) => {
     dispatch(actionsCatalog.changeFiltersPrice(newFilters));
   }, [filters.price]);
 
   return (
     <Filters
-      setTypesGuitars={setTypesGuitars}
-      setStringsGuitars={setStringsGuitars}
-      setPriceGuitars={setPriceGuitars}
+      onSetTypesGuitars={setTypesGuitarsHandler}
+      onSetStringsGuitars={setStringsGuitarsHandler}
+      onSetPriceGuitars={setPriceGuitarsHandler}
       allFilters={allFilters}
-      filters={filters}
       cards={filters.cards}
   />
   )

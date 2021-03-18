@@ -13,24 +13,24 @@ const PaginationContainer = () => {
   const dispatch = useDispatch();
 
   // получить следующую страницу
-  const getNextPage = useCallback(() => {
+  const getNextPageHandler = useCallback(() => {
     if(filters.pageNumber < (catalogCards.length / 9)) {
       dispatch(actionsCatalog.changePage(filters.pageNumber + 1));
     };
   }, [filters.pageNumber]);
 
   // получить определенную страницу
-  const getPage = useCallback((pageNumber) => {
+  const getPageHandler = useCallback((pageNumber) => {
     dispatch(actionsCatalog.changePage(pageNumber));
   }, [filters.pageNumber]);
 
   let pageButtons;
   if (allPages.length > 1) {
     pageButtons = <Pages
-      getNextPage={getNextPage}
+      onGetNextPage={getNextPageHandler}
       pages={allPages}
       activePage={filters.pageNumber}
-      getPage={getPage}
+      onGetPage={getPageHandler}
     />
   } else {
     pageButtons = null;

@@ -10,12 +10,12 @@ const SortingContainer = () => {
   const filters = useSelector((state) => state.catalog);
   const dispatch = useDispatch();
   // сортировка от меньшего к большему или наоборот
-  const sortType = useCallback((type) => {
+  const sortTypeHandler = useCallback((type) => {
     dispatch(actionsCatalog.changeTypeSort(`${type}`));
   }, [filters.sortType]);
 
   // сортировака по цене или популярности
-  const sortActive = useCallback((type) => {
+  const sortActiveHandler = useCallback((type) => {
     dispatch(actionsCatalog.changeActiveSort(`${type}`));
   }, [filters.sortActive]);
 
@@ -42,8 +42,8 @@ const SortingContainer = () => {
 
   return (
     <Sorting
-      sortActive={sortActive}
-      sortType={sortType}
+      onSortActive={sortActiveHandler}
+      onSortType={sortTypeHandler}
       filters={filters}
       addClassActive={addClassActive}
       addClassType={addClassType}

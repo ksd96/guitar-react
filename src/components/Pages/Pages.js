@@ -2,10 +2,10 @@ import ButtonPage from '../ButtonPage/ButtonPage.js';
 import PropTypes from 'prop-types';
 
 const Pages = ({
-  getNextPage,
+  onGetNextPage,
   pages,
   activePage,
-  getPage
+  onGetPage
 }) => {
 
   return (
@@ -13,20 +13,20 @@ const Pages = ({
       <ul className="pages__list">
         {
           pages.map((page) => {
-            return (<ButtonPage getPage={getPage} key={page} page={page} activePage={activePage} />)
+            return (<ButtonPage getPage={onGetPage} key={page} page={page} activePage={activePage} />)
           })
         }
       </ul>
-      <button onClick={getNextPage} className="pages__button-next" type="button">Далее</button>
+      <button onClick={onGetNextPage} className="pages__button-next" type="button">Далее</button>
     </section>
   )
 }
 
 Pages.propTypes = {
-  getNextPage: PropTypes.func,
-  pages: PropTypes.array,
+  onGetNextPage: PropTypes.func,
+  pages: PropTypes.arrayOf(PropTypes.number),
   activePage: PropTypes.number,
-  getPage: PropTypes.func
+  onGetPage: PropTypes.func
 }
 
 export default Pages;

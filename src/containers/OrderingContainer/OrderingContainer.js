@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import Ordering from '../../components/Ordering/Ordering.js';
 
 import promoCodes from '../../promo/promo-codes.js';
+import { promoErrorMessage } from '../../consts/consts.js';
 
-const OrderingContainer = ({cards, openPopupCode}) => {
+const OrderingContainer = ({cards, onOpenPopupCode}) => {
   const [state, setState] = useState(0);
   const [stateCode, setStateCode] = useState(``);
 
@@ -28,32 +29,32 @@ const OrderingContainer = ({cards, openPopupCode}) => {
     }
   }, [allPrice]);
 
-  const changeCode = useCallback((evt) => {
+  const changeCodeHandler = useCallback((evt) => {
     setStateCode(`${String(evt.target.value).toUpperCase()}`);
   }, []);
 
-  const codeCheck = useCallback((evt) => {
+  const codeCheckHandler = useCallback((evt) => {
     evt.preventDefault();
     if (Object.keys(promoCodes).includes(stateCode)) {
       setState(promoCodes[stateCode](state));
       evt.target.disabled = true;
     } else if (stateCode === ``) {
-      openPopupCode(`Введите промокод`);
+      onOpenPopupCode(promoErrorMessage.ENTER);
     } else if (stateCode === null) {
       return;
     } else {
-      openPopupCode(`Промокод недействителен`);
+      onOpenPopupCode(promoErrorMessage.INVALID);
     }
   }, [stateCode]);
 
   return (
-    <Ordering codeCheck={codeCheck} changeCode={changeCode} allPrice={state} />
+    <Ordering onCodeCheck={codeCheckHandler} onChangeCode={changeCodeHandler} allPrice={state} />
   );
 };
 
 Ordering.propTypes = {
-  cards: PropTypes.array,
-  openPopupCode: PropTypes.func
+  cards: PropTypes.arrayOf(PropTypes.object),
+  onOpenPopupCode: PropTypes.func
 }
 
 export default OrderingContainer;

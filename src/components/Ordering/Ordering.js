@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 
 const Ordering = ({
   allPrice,
-  changeCode,
-  codeCheck
+  onChangeCode,
+  onCodeCheck
 }) => {
   return (
     <div className="basket__ordering">
@@ -12,8 +12,8 @@ const Ordering = ({
         <p className="basket__subtitle">Введите свой промокод, если он у вас есть.</p>
         <form className="basket__code-wrapper" name="form-code">
           <label htmlFor="code" className="visually-hidden"></label>
-          <input onChange={changeCode} id="code" type="text" className="basket__code" name="code" />
-          <button onClick={codeCheck} className="basket__code-submit" type="submit">Применить купон</button>
+          <input onChange={onChangeCode} id="code" type="text" className="basket__code" name="code" />
+          <button onClick={onCodeCheck} className="basket__code-submit" type="submit">Применить купон</button>
         </form>
       </div>
       <div className="basket__checkout-wrapper">
@@ -26,8 +26,8 @@ const Ordering = ({
 
 Ordering.propTypes = {
   allPrice: PropTypes.number,
-  changeCode: PropTypes.func,
-  codeCheck: PropTypes.func
+  onChangeCode: PropTypes.func,
+  onCodeCheck: PropTypes.func
 }
 
 export default Ordering;

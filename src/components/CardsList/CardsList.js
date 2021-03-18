@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const CardsList = ({
   guitars,
-  openPopupAddBasket
+  onOpenPopupAddBasket
 }) => {
   return (
     <section className="cards">
@@ -14,7 +14,7 @@ const CardsList = ({
             <Card
               guitar={guitar}
               key={guitar.article}
-              openPopupAddBasket={() => {openPopupAddBasket(guitar)}}
+              openPopupAddBasket={() => {onOpenPopupAddBasket(guitar)}}
             />
           )
         })
@@ -25,8 +25,8 @@ const CardsList = ({
 };
 
 CardsList.propTypes = {
-  guitars: PropTypes.array,
-  openPopupAddBasket: PropTypes.func
+  guitars: PropTypes.arrayOf(PropTypes.object),
+  onOpenPopupAddBasket: PropTypes.func
 };
 
 export default CardsList;

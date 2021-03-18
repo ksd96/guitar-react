@@ -5,18 +5,19 @@ import FilterTypeItem from '../FilterTypeItem/FilterTypeItem.js';
 import {getStringsGuitarArray, getFilteredGuitarsStrings, getFilteredGuitarsTypes, getTypesGuitarArray} from '../../store/selectors/selectorsCatalog.js';
 
 const Filters = ({
-  setTypesGuitars,
-  setStringsGuitars,
-  setPriceGuitars,
+  onSetTypesGuitars,
+  onSetStringsGuitars,
+  onSetPriceGuitars,
   allFilters,
   cards
 }) => {
+  const priceMin = document.querySelector(`.filter__price-input_type_min`);
+  const priceMax = document.querySelector(`.filter__price-input_type_max`);
+  const filtersTypes = document.querySelectorAll(`[name="types"]`);
+  const filtersStrings = document.querySelectorAll(`[name="strings"]`);
+
   // получение активных фильтров
   const getFilteredGuitars = useCallback(() => {
-    const priceMin = document.querySelector(`.filter__price-input_type_min`);
-    const priceMax = document.querySelector(`.filter__price-input_type_max`);
-    const filtersTypes = document.querySelectorAll(`[name="types"]`);
-    const filtersStrings = document.querySelectorAll(`[name="strings"]`);
     const filterData = {
       "type": null,
       "strings": null,
@@ -41,66 +42,60 @@ const Filters = ({
       }
     });
     return filterData;
-  }, []);
+  }, [priceMin, priceMax, filtersTypes, filtersStrings]);
 
   // смена минимальной цены
   const onChangePriceMin = useCallback(() => {
-    const priceMin = document.querySelector(`.filter__price-input_type_min`);
-    const priceMax = document.querySelector(`.filter__price-input_type_max`);
     if (+priceMin.value < +allFilters.price.min) {
       priceMin.value = allFilters.price.min;
     } else if (+priceMin.value >= +priceMax.value) {
       priceMin.value = priceMax.value;
     }
-    setPriceGuitars(getFilteredGuitars().price);
+    onSetPriceGuitars(getFilteredGuitars().price);
     clickFilterItemTypes(getFilteredGuitars());
     clickFilterItemStrings(getFilteredGuitars());
-  }, []);
+  }, [priceMin, priceMax]);
 
   // смена максимальной цены
   const onChangePriceMax = useCallback(() => {
-    const priceMin = document.querySelector(`.filter__price-input_type_min`);
-    const priceMax = document.querySelector(`.filter__price-input_type_max`);
     if (+priceMax.value <= +priceMin.value) {
       priceMax.value = priceMin.value;
     }
-    setPriceGuitars(getFilteredGuitars().price);
+    onSetPriceGuitars(getFilteredGuitars().price);
     clickFilterItemTypes(getFilteredGuitars());
     clickFilterItemStrings(getFilteredGuitars());
-  }, []);
+  }, [priceMin, priceMax]);
 
   // валидация фильтра по типу гитар
   const clickFilterItemTypes = useCallback((filters) => {
     const typeGuitars = getTypesGuitarArray(getFilteredGuitarsStrings(cards, filters));
-    const typeGuitarsAll = document.querySelectorAll(`[name="types"]`);
 
-    typeGuitarsAll.forEach((item) => {
+    filtersTypes.forEach((item) => {
       item.disabled = true;
     });
     typeGuitars.forEach((item) => {
-      typeGuitarsAll.forEach((item2) => {
+      filtersTypes.forEach((item2) => {
         if (item === item2.value) {
           item2.disabled = false;
         }
       });
     });
-  }, []);
+  }, [filtersTypes]);
 
       // валидация фильтра по количеству струн
   const clickFilterItemStrings = useCallback((filters) => {
     const typeGuitars = getStringsGuitarArray(getFilteredGuitarsTypes(cards, filters));
-    const typeGuitarsAll = document.querySelectorAll(`[name="strings"]`);
-    typeGuitarsAll.forEach((item) => {
+    filtersStrings.forEach((item) => {
       item.disabled = true;
     });
     typeGuitars.forEach((item) => {
-      typeGuitarsAll.forEach((item2) => {
+      filtersStrings.forEach((item2) => {
         if (item === +item2.value) {
           item2.disabled = false;
         }
       });
     });
-  }, []);
+  }, [filtersStrings]);
 
   return (
     <section className="filters">
@@ -110,10 +105,10 @@ const Filters = ({
           <h3 className="filter__title-item">Цена, ₽</h3>
           <div className="filter__price-wrapper">
             <label className="visually-hidden" htmlFor="price-min">Минимальная цена</label>
-            <input onBlur={onChangePriceMin} id="price-min" type="text" defaultValue={allFilters.price.min} className="filter__price-input filter__price-input_type_min" />
+            <input onBlur={onChangePriceMin} id="price-min" type="number" defaultValue={allFilters.price.min} className="filter__price-input filter__price-input_type_min" />
             <span className="filter__price-span"></span>
             <label className="visually-hidden" htmlFor="price-max">Максимальная цена</label>
-            <input onBlur={onChangePriceMax} id="price-max" type="text" defaultValue={allFilters.price.max} className="filter__price-input filter__price-input_type_max" />
+            <input onBlur={onChangePriceMax} id="price-max" type="number" defaultValue={allFilters.price.max} className="filter__price-input filter__price-input_type_max" />
           </div>
         </div>
         <div className="filter__type">
@@ -124,7 +119,7 @@ const Filters = ({
                 return (
                   <FilterTypeItem
                     onClick={() => {
-                      setTypesGuitars(getFilteredGuitars().type);
+                      onSetTypesGuitars(getFilteredGuitars().type);
                       clickFilterItemStrings(getFilteredGuitars());
                     }}
                     name={`types`}
@@ -145,7 +140,7 @@ const Filters = ({
                 return (
                   <FilterTypeItem
                     onClick={() => {
-                      setStringsGuitars(getFilteredGuitars().strings);
+                      onSetStringsGuitars(getFilteredGuitars().strings);
                       clickFilterItemTypes(getFilteredGuitars());
                     }}
                     name={`strings`}
@@ -163,11 +158,11 @@ const Filters = ({
 };
 
 Filters.propTypes = {
-  setTypesGuitars: PropTypes.func,
-  setStringsGuitars: PropTypes.func,
-  setPriceGuitars: PropTypes.func,
+  onSetTypesGuitars: PropTypes.func,
+  onSetStringsGuitars: PropTypes.func,
+  onSetPriceGuitars: PropTypes.func,
   allFilters: PropTypes.object,
-  cards: PropTypes.object
+  cards: PropTypes.objectOf(PropTypes.object)
 };
 
 export default Filters;
