@@ -15,7 +15,7 @@ const PopupAddBasket = ({
       if (event.key === `Escape`) {
         closePopup();
       }
-    }
+    };
     window.addEventListener(`keydown`, closeEsc);
     page.classList.add(`page_no-scrole`);
     button.focus();
@@ -46,7 +46,7 @@ const PopupAddBasket = ({
         </button>
       </div>
     </div>
-  )
+  );
 };
 
 PopupAddBasket.propTypes = {
@@ -60,6 +60,6 @@ PopupAddBasket.propTypes = {
   }),
   closePopup: PropTypes.func,
   addCardInBasket: PropTypes.func
-}
+};
 
 export default PopupAddBasket;

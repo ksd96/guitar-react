@@ -12,6 +12,6 @@ const Crumb = ({name, link}) => {
 Crumb.propTypes = {
   name: PropTypes.string,
   link: PropTypes.string
-}
+};
 
-export  default Crumb;
+export default Crumb;

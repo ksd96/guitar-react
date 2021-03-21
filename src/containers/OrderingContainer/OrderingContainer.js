@@ -11,9 +11,9 @@ const OrderingContainer = ({cards, onOpenPopupCode}) => {
   const [stateCode, setStateCode] = useState(``);
 
   // получить полную стоимость
-  const getAllPrice = useCallback((cards) => {
+  const getAllPrice = useCallback((items) => {
     let allPrice = 0;
-    cards.forEach((card) => {
+    items.forEach((card) => {
       allPrice = allPrice + (card.price * card.count);
     });
     return allPrice;
@@ -22,12 +22,12 @@ const OrderingContainer = ({cards, onOpenPopupCode}) => {
   const allPrice = getAllPrice(cards);
 
   useEffect(() => {
-    if (stateCode) {
+    if (stateCode && Object.keys(promoCodes).includes(stateCode)) {
       setState(promoCodes[stateCode](allPrice));
     } else {
       setState(allPrice);
     }
-  }, [allPrice]);
+  }, [allPrice, stateCode]);
 
   const changeCodeHandler = useCallback((evt) => {
     setStateCode(`${String(evt.target.value).toUpperCase()}`);
@@ -39,13 +39,13 @@ const OrderingContainer = ({cards, onOpenPopupCode}) => {
       setState(promoCodes[stateCode](state));
       evt.target.disabled = true;
     } else if (stateCode === ``) {
-      onOpenPopupCode(promoErrorMessage.ENTER);
+      onOpenPopupCode({text: promoErrorMessage.ENTER});
     } else if (stateCode === null) {
       return;
     } else {
-      onOpenPopupCode(promoErrorMessage.INVALID);
+      onOpenPopupCode({text: promoErrorMessage.INVALID});
     }
-  }, [stateCode]);
+  }, [stateCode, onOpenPopupCode, state]);
 
   return (
     <Ordering onCodeCheck={codeCheckHandler} onChangeCode={changeCodeHandler} allPrice={state} />
@@ -53,8 +53,16 @@ const OrderingContainer = ({cards, onOpenPopupCode}) => {
 };
 
 Ordering.propTypes = {
-  cards: PropTypes.arrayOf(PropTypes.object),
+  cards: PropTypes.arrayOf(PropTypes.shape({
+    img: PropTypes.string,
+    strings: PropTypes.number,
+    name: PropTypes.string,
+    price: PropTypes.number,
+    article: PropTypes.string,
+    type: PropTypes.string,
+    count: PropTypes.number
+  })),
   onOpenPopupCode: PropTypes.func
-}
+};
 
 export default OrderingContainer;

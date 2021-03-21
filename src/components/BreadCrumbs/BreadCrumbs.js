@@ -14,21 +14,24 @@ const BreadCrumbs = ({
           items.map((item) => {
             return (
               <Crumb key={item.name} name={item.name} link={item.link} />
-            )
+            );
           })
         }
         <li className="main__links-item">
-          <a className="main__link">{active}</a>
+          <button className="main__link">{active}</button>
         </li>
       </ul>
     </div>
-  )
+  );
 };
 
 BreadCrumbs.propTypes = {
   title: PropTypes.string,
-  items: PropTypes.arrayOf(PropTypes.object),
+  items: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    link: PropTypes.string
+  })),
   activer: PropTypes.string
-}
+};
 
 export default BreadCrumbs;

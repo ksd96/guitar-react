@@ -18,7 +18,7 @@ const Ordering = ({
       </div>
       <div className="basket__checkout-wrapper">
         <p className="basket__price">Всего: <span className="basket__all-price">{allPrice}</span> ₽</p>
-        <a href="#" className="basket__checkout">Оформить заказ</a>
+        <button className="basket__checkout">Оформить заказ</button>
       </div>
     </div>
   );
@@ -28,6 +28,6 @@ Ordering.propTypes = {
   allPrice: PropTypes.number,
   onChangeCode: PropTypes.func,
   onCodeCheck: PropTypes.func
-}
+};
 
 export default Ordering;

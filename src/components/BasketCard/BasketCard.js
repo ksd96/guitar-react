@@ -9,13 +9,13 @@ const BasketCard = ({
   onOpenPopupDelete
 }) => {
 
-  const deleteGuitar = useCallback (() => {
-    if(card.count === 1) {
+  const deleteGuitar = useCallback(() => {
+    if (card.count === 1) {
       onOpenPopupDelete();
     } else {
       onDeleteCard(card, false);
     }
-  }, [card]);
+  }, [card, onOpenPopupDelete, onDeleteCard]);
 
   return (
     <li className="basket__item guitar">
@@ -34,14 +34,14 @@ const BasketCard = ({
       </div>
       <p className="guitar__price"><span className="guitar__price-content">{card.price}</span> ₽</p>
       <div className="guitar__buttons">
-        <button onClick={() => {deleteGuitar()}} className="guitar__button guitar__button_type_less" type="button">-</button>
+        <button onClick={ () => { deleteGuitar(); } } className="guitar__button guitar__button_type_less" type="button">-</button>
         <p className="guitar__quantity">{card.count}</p>
-        <button onClick={() => {onAddCard(card)}} className="guitar__button guitar__button_type_more" type="button">+</button>
+        <button onClick={ () => { onAddCard(card); } } className="guitar__button guitar__button_type_more" type="button">+</button>
       </div>
       <p className="guitar__full-price"><span className="guitar__full-price-content">{card.count * card.price}</span> ₽</p>
     </li>
-  )
-}
+  );
+};
 
 BasketCard.propTypes = {
   card: PropTypes.shape({
@@ -56,6 +56,6 @@ BasketCard.propTypes = {
   onAddCard: PropTypes.func,
   onDeleteCard: PropTypes.func,
   openPopupDelete: PropTypes.func
-}
+};
 
 export default BasketCard;

@@ -2,7 +2,7 @@ import './styles/filter.scss';
 import { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import FilterTypeItem from '../FilterTypeItem/FilterTypeItem.js';
-import {getStringsGuitarArray, getFilteredGuitarsStrings, getFilteredGuitarsTypes, getTypesGuitarArray} from '../../store/selectors/selectorsCatalog.js';
+import {getStringsGuitarArray, getFilteredGuitarsStrings, getFilteredGuitarsTypes, getTypesGuitarArray} from '../../store/dataUtils/utilsCatalog.js';
 
 const Filters = ({
   onSetTypesGuitars,
@@ -15,6 +15,37 @@ const Filters = ({
   const priceMax = document.querySelector(`.filter__price-input_type_max`);
   const filtersTypes = document.querySelectorAll(`[name="types"]`);
   const filtersStrings = document.querySelectorAll(`[name="strings"]`);
+
+  // валидация фильтра по типу гитар
+  const clickFilterItemTypes = useCallback((filters) => {
+    const typeGuitars = getTypesGuitarArray(getFilteredGuitarsStrings(cards, filters));
+
+    filtersTypes.forEach((item) => {
+      item.disabled = true;
+    });
+    typeGuitars.forEach((item) => {
+      filtersTypes.forEach((item2) => {
+        if (item === item2.value) {
+          item2.disabled = false;
+        }
+      });
+    });
+  }, [filtersTypes, cards]);
+
+  // валидация фильтра по количеству струн
+  const clickFilterItemStrings = useCallback((filters) => {
+    const typeGuitars = getStringsGuitarArray(getFilteredGuitarsTypes(cards, filters));
+    filtersStrings.forEach((item) => {
+      item.disabled = true;
+    });
+    typeGuitars.forEach((item) => {
+      filtersStrings.forEach((item2) => {
+        if (item === +item2.value) {
+          item2.disabled = false;
+        }
+      });
+    });
+  }, [filtersStrings, cards]);
 
   // получение активных фильтров
   const getFilteredGuitars = useCallback(() => {
@@ -54,7 +85,7 @@ const Filters = ({
     onSetPriceGuitars(getFilteredGuitars().price);
     clickFilterItemTypes(getFilteredGuitars());
     clickFilterItemStrings(getFilteredGuitars());
-  }, [priceMin, priceMax]);
+  }, [priceMin, priceMax, allFilters.price.min, onSetPriceGuitars, clickFilterItemTypes, clickFilterItemStrings, getFilteredGuitars]);
 
   // смена максимальной цены
   const onChangePriceMax = useCallback(() => {
@@ -64,38 +95,7 @@ const Filters = ({
     onSetPriceGuitars(getFilteredGuitars().price);
     clickFilterItemTypes(getFilteredGuitars());
     clickFilterItemStrings(getFilteredGuitars());
-  }, [priceMin, priceMax]);
-
-  // валидация фильтра по типу гитар
-  const clickFilterItemTypes = useCallback((filters) => {
-    const typeGuitars = getTypesGuitarArray(getFilteredGuitarsStrings(cards, filters));
-
-    filtersTypes.forEach((item) => {
-      item.disabled = true;
-    });
-    typeGuitars.forEach((item) => {
-      filtersTypes.forEach((item2) => {
-        if (item === item2.value) {
-          item2.disabled = false;
-        }
-      });
-    });
-  }, [filtersTypes]);
-
-      // валидация фильтра по количеству струн
-  const clickFilterItemStrings = useCallback((filters) => {
-    const typeGuitars = getStringsGuitarArray(getFilteredGuitarsTypes(cards, filters));
-    filtersStrings.forEach((item) => {
-      item.disabled = true;
-    });
-    typeGuitars.forEach((item) => {
-      filtersStrings.forEach((item2) => {
-        if (item === +item2.value) {
-          item2.disabled = false;
-        }
-      });
-    });
-  }, [filtersStrings]);
+  }, [priceMin, priceMax, onSetPriceGuitars, clickFilterItemTypes, clickFilterItemStrings, getFilteredGuitars]);
 
   return (
     <section className="filters">
@@ -127,7 +127,7 @@ const Filters = ({
                     typeName={type}
 
                   />
-                )
+                );
               })
             }
           </ul>
@@ -147,22 +147,50 @@ const Filters = ({
                     key={type}
                     typeName={`${type}`}
                   />
-                )
+                );
               })
             }
           </ul>
         </div>
       </form>
     </section>
-  )
+  );
 };
 
 Filters.propTypes = {
   onSetTypesGuitars: PropTypes.func,
   onSetStringsGuitars: PropTypes.func,
   onSetPriceGuitars: PropTypes.func,
-  allFilters: PropTypes.object,
-  cards: PropTypes.objectOf(PropTypes.object)
+  allFilters: PropTypes.shape({
+    allPages: PropTypes.arrayOf(PropTypes.number),
+    cards: PropTypes.shape({
+      article: PropTypes.string,
+      img: PropTypes.string,
+      name: PropTypes.string,
+      popularitu: PropTypes.number,
+      price: PropTypes.number,
+      strings: PropTypes.number,
+      type: PropTypes.string
+    }),
+    pageNumber: PropTypes.number,
+    price: PropTypes.shape({
+      min: PropTypes.number,
+      max: PropTypes.number
+    }),
+    sortActive: PropTypes.string,
+    sortState: PropTypes.bool,
+    strings: PropTypes.objectOf(PropTypes.number),
+    type: PropTypes.objectOf(PropTypes.string)
+  }),
+  cards: PropTypes.objectOf(PropTypes.shape({
+    article: PropTypes.string,
+    img: PropTypes.string,
+    name: PropTypes.string,
+    popularitu: PropTypes.number,
+    price: PropTypes.number,
+    strings: PropTypes.number,
+    type: PropTypes.string
+  }))
 };
 
 export default Filters;

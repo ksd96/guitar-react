@@ -12,6 +12,6 @@ const reducerBasket = (state = initialState.basket, action) => {
     default:
       return state;
   }
-}
+};
 
 export default reducerBasket;

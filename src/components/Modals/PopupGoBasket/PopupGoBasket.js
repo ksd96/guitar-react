@@ -12,7 +12,7 @@ const PopupGoBasket = ({
       if (event.key === `Escape`) {
         closePopup();
       }
-    }
+    };
     window.addEventListener(`keydown`, closeEsc);
     page.classList.add(`page_no-scrole`);
     return () => {
@@ -32,11 +32,11 @@ const PopupGoBasket = ({
         <svg className="popup__icon" width="11.5" height="11.5"><use xlinkHref="#icon-close"></use></svg>
       </button>
     </div>
-  )
+  );
 };
 
 PopupGoBasket.propTypes = {
   closePopup: PropTypes.func
-}
+};
 
 export default PopupGoBasket;

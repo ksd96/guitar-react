@@ -211,7 +211,8 @@ const getInitialFilters = (guitars) => {
       sortState: false,
       pageNumber: 1,
       allPages: getAllPages(),
-      cards: guitars
+      cards: {},
+      status: false
     };
 
     return filters;

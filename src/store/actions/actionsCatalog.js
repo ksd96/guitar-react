@@ -5,7 +5,8 @@ const actionsCatalogTypes = {
   CHANGE_FILTERS_TYPE: `CHANGE_FILTERS_TYPE`,
   CHANGE_FILTERS_STRINGS: `CHANGE_FILTERS_STRINGS`,
   CHANGE_FILTERS_PRICE: `CHANGE_FILTERS_PRICE`,
-  CHANGE_CARDS: `CHANGE_CARDS`
+  CHANGE_CARDS: `CHANGE_CARDS`,
+  GET_INITIAL_FILTERS: `GET_INITIAL_FILTERS`
 };
 
 const actionsCatalog = {
@@ -16,6 +17,7 @@ const actionsCatalog = {
   changeFiltersStrings: (payload) => ({type: actionsCatalogTypes.CHANGE_FILTERS_STRINGS, payload}),
   changeFiltersPrice: (payload) => ({type: actionsCatalogTypes.CHANGE_FILTERS_PRICE, payload}),
   changeCards: (payload) => ({type: actionsCatalogTypes.CHANGE_CARDS, payload}),
+  getInitialFilters: (payload) => ({type: actionsCatalogTypes.GET_INITIAL_FILTERS, payload})
 };
 
 export { actionsCatalogTypes, actionsCatalog };

@@ -14,18 +14,23 @@ const CardsList = ({
             <Card
               guitar={guitar}
               key={guitar.article}
-              openPopupAddBasket={() => {onOpenPopupAddBasket(guitar)}}
+              openPopupAddBasket={onOpenPopupAddBasket}
             />
-          )
+          );
         })
       }
     </ul>
   </section>
-  )
+  );
 };
 
 CardsList.propTypes = {
-  guitars: PropTypes.arrayOf(PropTypes.object),
+  guitars: PropTypes.arrayOf(PropTypes.shape({
+    img: PropTypes.string,
+    popularity: PropTypes.number,
+    name: PropTypes.string,
+    price: PropTypes.number
+  })),
   onOpenPopupAddBasket: PropTypes.func
 };
 

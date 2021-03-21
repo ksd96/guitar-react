@@ -1,10 +1,10 @@
 const promoCodes = {
-  "GITARAHIT": function(summ) {
+  "GITARAHIT": function (summ) {
     if (typeof summ === `number` && summ !== 0) {
       return (Number(summ) * 90) / 100;
     }
   },
-  "SUPERGITARA": function(summ) {
+  "SUPERGITARA": function (summ) {
     if (typeof summ === `number` && summ !== 0) {
       if (summ >= 700) {
         return Number(summ) - 700;
@@ -13,7 +13,7 @@ const promoCodes = {
       }
     }
   },
-  "GITARA2020": function(summ) {
+  "GITARA2020": function (summ) {
     if (typeof summ === `number` && summ !== 0) {
       let number = (Number(summ) * 30) / 100;
       if (number < 3500) {
@@ -23,6 +23,6 @@ const promoCodes = {
       }
     }
   }
-}
+};
 
 export default promoCodes;

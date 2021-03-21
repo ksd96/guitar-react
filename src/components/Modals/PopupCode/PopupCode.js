@@ -9,7 +9,7 @@ const PopupCode = ({text, closePopup}) => {
       if (event.key === `Escape`) {
         closePopup();
       }
-    }
+    };
     window.addEventListener(`keydown`, closeEsc);
     page.classList.add(`page_no-scrole`);
     button.focus();
@@ -32,6 +32,6 @@ const PopupCode = ({text, closePopup}) => {
 PopupCode.propTypes = {
   text: PropTypes.string,
   closePopup: PropTypes.func
-}
+};
 
 export default PopupCode;

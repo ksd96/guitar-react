@@ -12,19 +12,19 @@ const SortingContainer = () => {
   // сортировка от меньшего к большему или наоборот
   const sortTypeHandler = useCallback((type) => {
     dispatch(actionsCatalog.changeTypeSort(`${type}`));
-  }, [filters.sortType]);
+  }, [dispatch]);
 
   // сортировака по цене или популярности
   const sortActiveHandler = useCallback((type) => {
     dispatch(actionsCatalog.changeActiveSort(`${type}`));
-  }, [filters.sortActive]);
+  }, [dispatch]);
 
   // получить классы для элементов сортировки
   const addClassActive = useCallback((value) => {
     const classButton = classNames({
       "sort__button-type": true,
-      "sort__button-type_type_price": `price` === `${value}`,
-      "sort__button-type_type_popularity": `popularity` === `${value}`,
+      "sort__button-type_type_price": `${value}` === `price`,
+      "sort__button-type_type_popularity": `${value}` === `popularity`,
       "sort__button-type_active": filters.sortActive === `${value}` && filters.sortState === true
     });
     return classButton;
@@ -33,8 +33,8 @@ const SortingContainer = () => {
   const addClassType = useCallback((value) => {
     const classButton = classNames({
       "sort__button": true,
-      "sort__button_type_min": `min` === `${value}`,
-      "sort__button_type_max": `max` === `${value}`,
+      "sort__button_type_min": `${value}` === `min`,
+      "sort__button_type_max": `${value}` === `max`,
       "sort__button_active": filters.sortType === `${value}` && filters.sortState === true
     });
     return classButton;
@@ -48,7 +48,7 @@ const SortingContainer = () => {
       addClassActive={addClassActive}
       addClassType={addClassType}
     />
-  )
+  );
 };
 
 export default SortingContainer;

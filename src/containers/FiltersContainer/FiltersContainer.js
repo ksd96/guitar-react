@@ -4,27 +4,27 @@ import React, { useCallback } from 'react';
 import Filters from '../../components/Filters/Filters.js';
 
 import { actionsCatalog } from '../../store/actions/actionsCatalog.js';
-import initialState from '../../store/initialStates/initialState.js';
+import { getInitialFilters } from '../../store/dataUtils/utilsCatalog.js';
 
 const FiltersContainer = () => {
-  const allFilters = initialState.catalog;
   const filters = useSelector((state) => state.catalog);
+  const allFilters = getInitialFilters(filters.allCards);
   const dispatch = useDispatch();
 
   // изменение фильтов по типу гитары
   const setTypesGuitarsHandler = useCallback((newFilters) => {
     dispatch(actionsCatalog.changeFiltersType(newFilters));
-  }, [filters.type]);
+  }, [dispatch]);
 
   // изменение фильтов по колличеству струн
   const setStringsGuitarsHandler = useCallback((newFilters) => {
     dispatch(actionsCatalog.changeFiltersStrings(newFilters));
-  }, [filters.strings]);
+  }, [dispatch]);
 
   // изменение фильтов по цене
   const setPriceGuitarsHandler = useCallback((newFilters) => {
     dispatch(actionsCatalog.changeFiltersPrice(newFilters));
-  }, [filters.price]);
+  }, [dispatch]);
 
   return (
     <Filters
@@ -33,8 +33,8 @@ const FiltersContainer = () => {
       onSetPriceGuitars={setPriceGuitarsHandler}
       allFilters={allFilters}
       cards={filters.cards}
-  />
-  )
+    />
+  );
 };
 
 export default FiltersContainer;

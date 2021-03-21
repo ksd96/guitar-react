@@ -8,7 +8,7 @@ const Card = ({
   return (
     <li className="card">
       <picture className="card__picture">
-        <source className="card__image-webp" type="image/webp" srcSet={`./img/${guitar.img}.webp`}  />
+        <source className="card__image-webp" type="image/webp" srcSet={`./img/${guitar.img}.webp`} />
 
         <img className="card__image" src={`./img/${guitar.img}.png`} alt="гитара" width="68" height="190" />
       </picture>
@@ -26,7 +26,7 @@ const Card = ({
       </div>
       <div className="card__buttons">
         <button className="card__button card__button_type_more" type="button">Подробнее</button>
-        <button onClick={openPopupAddBasket} className="card__button card__button_type_buy" type="button">Купить</button>
+        <button onClick={() => { openPopupAddBasket(guitar); } } className="card__button card__button_type_buy" type="button">Купить</button>
       </div>
     </li>
   );
@@ -40,6 +40,6 @@ Card.propTypes = {
     price: PropTypes.number
   }),
   openPopupAddBasket: PropTypes.func
-}
+};
 
 export default Card;

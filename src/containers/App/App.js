@@ -19,7 +19,7 @@ const App = () => {
           <Route exact path="/">
             <CatalogPage />
           </Route>
-          <Route  path="/basket">
+          <Route path="/basket">
             <BasketPage />
           </Route>
         </Switch>
@@ -27,6 +27,6 @@ const App = () => {
       </div>
     </Provider>
   );
-}
+};
 
 export default App;

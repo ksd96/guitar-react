@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Pages from '../../components/Pages/Pages.js';
 
 import { actionsCatalog } from '../../store/actions/actionsCatalog.js';
-import { getAllPages, getFilteredCards } from '../../store/selectors/selectorsCatalog.js';
+import { getAllPages, getFilteredCards } from '../../store/dataUtils/utilsCatalog.js';
 
 const PaginationContainer = () => {
   const filters = useSelector((state) => state.catalog);
@@ -14,15 +14,15 @@ const PaginationContainer = () => {
 
   // получить следующую страницу
   const getNextPageHandler = useCallback(() => {
-    if(filters.pageNumber < (catalogCards.length / 9)) {
+    if (filters.pageNumber < (catalogCards.length / 9)) {
       dispatch(actionsCatalog.changePage(filters.pageNumber + 1));
-    };
-  }, [filters.pageNumber]);
+    }
+  }, [filters.pageNumber, catalogCards.length, dispatch]);
 
   // получить определенную страницу
   const getPageHandler = useCallback((pageNumber) => {
     dispatch(actionsCatalog.changePage(pageNumber));
-  }, [filters.pageNumber]);
+  }, [dispatch]);
 
   let pageButtons;
   if (allPages.length > 1) {
@@ -31,14 +31,14 @@ const PaginationContainer = () => {
       pages={allPages}
       activePage={filters.pageNumber}
       onGetPage={getPageHandler}
-    />
+    />;
   } else {
     pageButtons = null;
   }
 
   return (
     pageButtons
-  )
+  );
 };
 
 export default PaginationContainer;

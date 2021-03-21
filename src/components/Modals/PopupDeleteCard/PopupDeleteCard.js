@@ -14,7 +14,7 @@ const PopupDeleteCard = ({
       if (event.key === `Escape`) {
         closePopup();
       }
-    }
+    };
     window.addEventListener(`keydown`, closeEsc);
     page.classList.add(`page_no-scrole`);
     button.focus();
@@ -40,7 +40,7 @@ const PopupDeleteCard = ({
           <p className="popup__price">Цена: <span className="popup__guitar-price">{data.price}</span>  ₽</p>
         </div>
         <div className="popup__wrapper-buttons">
-          <button onClick={() => {deleteCard(data, true); closePopup()}} className="popup__button popup__button_type_delete" type="button">Удалить товар</button>
+          <button onClick={() => { deleteCard(data, true); closePopup(); }} className="popup__button popup__button_type_delete" type="button">Удалить товар</button>
           <button onClick={closePopup} className="popup__button popup__button_type_go-shoping" type="button">Продолжить покупки</button>
         </div>
         <button onClick={closePopup} className="popup__close" type="button">
@@ -48,7 +48,7 @@ const PopupDeleteCard = ({
         </button>
       </div>
     </div>
-  )
+  );
 };
 
 PopupDeleteCard.propTypes = {
@@ -61,6 +61,6 @@ PopupDeleteCard.propTypes = {
   }),
   closePopup: PropTypes.func,
   deleteCard: PropTypes.func
-}
+};
 
 export default PopupDeleteCard;

@@ -13,10 +13,10 @@ const FilterTypeItem = ({
         <span className="filter__name">{typeName}</span>
       </label>
     </li>
-  )
+  );
 };
 
-FilterTypeItem.propTypes ={
+FilterTypeItem.propTypes = {
   onClick: PropTypes.func,
   name: PropTypes.string,
   typeName: PropTypes.string

@@ -1,5 +1,5 @@
 import { actionsCatalogTypes } from '../actions/actionsCatalog.js';
-import initialState from '../initialStates/initialState.js'
+import initialState from '../initialStates/initialState.js';
 
 const reducerCatalog = (state = initialState.catalog, action) => {
   switch (action.type) {
@@ -46,11 +46,21 @@ const reducerCatalog = (state = initialState.catalog, action) => {
     case actionsCatalogTypes.CHANGE_CARDS:
       return {
         ...state,
-        cards: action.payload
-      }
+        cards: action.payload,
+        allCards: action.payload
+      };
+    case actionsCatalogTypes.GET_INITIAL_FILTERS:
+      return {
+        ...state,
+        status: true,
+        type: action.payload.type,
+        strings: action.payload.strings,
+        price: action.payload.price,
+        allPages: action.payload.allPages
+      };
     default:
       return state;
   }
-}
+};
 
 export default reducerCatalog;
