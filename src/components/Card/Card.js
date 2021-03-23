@@ -1,10 +1,16 @@
 import './styles/card.scss';
 import PropTypes from 'prop-types';
+import React, { useCallback } from 'react';
 
 const Card = ({
   guitar,
   openPopupAddBasket
 }) => {
+
+  const openPopup = useCallback(() => {
+    openPopupAddBasket(guitar);
+  }, [openPopupAddBasket, guitar]);
+
   return (
     <li className="card">
       <picture className="card__picture">
@@ -26,7 +32,7 @@ const Card = ({
       </div>
       <div className="card__buttons">
         <button className="card__button card__button_type_more" type="button">Подробнее</button>
-        <button onClick={() => { openPopupAddBasket(guitar); } } className="card__button card__button_type_buy" type="button">Купить</button>
+        <button onClick={openPopup} className="card__button card__button_type_buy" type="button">Купить</button>
       </div>
     </li>
   );

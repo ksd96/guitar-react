@@ -5,13 +5,16 @@ import CardsList from '../../components/CardsList/CardsList.js';
 import SortingContainer from '../SortingContainer/SortingContainer.js';
 import FiltersContainer from '../FiltersContainer/FiltersContainer.js';
 import BreadCrumbs from '../../components/BreadCrumbs/BreadCrumbs.js';
-import ModalsContainer from '../ModalsContainer/ModalsContainer.js';
 import PaginationContainer from '../PaginationContainer/PaginationContainer.js';
 
 import { actionsBasket } from '../../store/actions/actionsBasket.js';
 import { addGuitar } from '../../store/dataUtils/utilsBasket.js';
 import { getFilteredCards } from '../../store/dataUtils/utilsCatalog.js';
 import { popupTypes, pageTitles, activePage, pageLinks } from '../../consts/consts.js';
+
+import PopupAddBasket from '../../components/Modals/PopupAddBasket/PopupAddBasket.js';
+import PopupGoBasket from '../../components/Modals/PopupGoBasket/PopupGoBasket.js';
+import ModalsBox from '../../components/ModalsBox/ModalsBox.js';
 
 import getGuitars from '../../store/api/getGuitars.js';
 
@@ -67,6 +70,15 @@ const CatalogPage = () => {
     filtersContainer = null;
   };
 
+  let modalsContainer;
+  if (modals.type === popupTypes.ADD_IN_BASKET) {
+    modalsContainer = <ModalsBox title={`Добавить товар в корзину`} status={modals.type} onClosePopup={closePopupHandler}><PopupAddBasket data={modals.data} addCardInBasket={addCardBasketHandler} /></ModalsBox>
+  } else if (modals.type === popupTypes.GO_BASKET) {
+    modalsContainer = <ModalsBox title={`Товар успешно добавлен в корзину`} status={modals.type} onClosePopup={closePopupHandler}><PopupGoBasket closePopup={closePopupHandler} /></ModalsBox>
+  } else {
+    modalsContainer = null;
+  };
+
   return (
     <div className="content">
       <main className="main">
@@ -87,13 +99,7 @@ const CatalogPage = () => {
         </div>
         <PaginationContainer />
       </main>
-      <ModalsContainer
-        type={modals.type}
-        data={modals.data}
-        closePopupHandler={closePopupHandler}
-        openPopupAddBasketHandler={openPopupAddBasketHandler}
-        addCardBasketHandler={addCardBasketHandler}
-      />
+      {modalsContainer}
     </div>
   );
 };

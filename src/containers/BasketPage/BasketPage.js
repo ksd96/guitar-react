@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import OrderingContainer from '../OrderingContainer/OrderingContainer.js';
 import BreadCrumbs from '../../components/BreadCrumbs/BreadCrumbs.js';
 import BasketCard from '../../components/BasketCard/BasketCard.js';
-import ModalsContainer from '../ModalsContainer/ModalsContainer.js';
+import PopupDeleteCard from '../../components/Modals/PopupDeleteCard/PopupDeleteCard.js';
+import ModalsBox from '../../components/ModalsBox/ModalsBox.js';
 
 import { actionsBasket } from '../../store/actions/actionsBasket.js';
 import { addGuitar, deleteGuitar } from '../../store/dataUtils/utilsBasket.js';
@@ -67,6 +68,15 @@ const BasketPage = () => {
     }
   }, [dispatch, openPopupDeleteHandler, stateBasket]);
 
+  let modalsContainer;
+  if (modals.type === popupTypes.DELETE_CARD) {
+    modalsContainer = <ModalsBox title={`Удалить этот товар?`} status={modals.type} onClosePopup={closePopupHandler}><PopupDeleteCard data={modals.data} closePopup={closePopupHandler} deleteCard={deleteCardHandler} /></ModalsBox>
+  } else if (modals.type === popupTypes.PROMO) {
+    modalsContainer = <ModalsBox title={modals.data.text} status={modals.type} onClosePopup={closePopupHandler}></ModalsBox>
+  } else {
+    modalsContainer = null;
+  };
+
   return (
     <main className="main main_basket">
       <BreadCrumbs
@@ -97,12 +107,7 @@ const BasketPage = () => {
           />
         </section>
       </div>
-      <ModalsContainer
-        type={modals.type}
-        data={modals.data}
-        closePopupHandler={closePopupHandler}
-        deleteCardHandler={deleteCardHandler}
-      />
+      {modalsContainer}
     </main>
   );
 };
