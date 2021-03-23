@@ -9,19 +9,19 @@ const Footer = () => {
             <svg className="footer__logo" width="67" height="70"><use xlinkHref="#logo-footer"></use></svg>
             <ul className="footer__socials-list">
               <li className="footer__social-item">
-                <button className="footer__social-link" title="ссылка на страницу в фейсбуке">
+                <a href="#" className="footer__social-link" title="ссылка на страницу в фейсбуке">
                   <svg className="footer__social-icon" width="24" height="24"><use xlinkHref="#icon-fb"></use></svg>
-                </button>
+                </a>
               </li>
               <li className="footer__social-item">
-                <button className="footer__social-link" title="ссылка на страницу в инстаграмме">
+                <a href="#" className="footer__social-link" title="ссылка на страницу в инстаграмме">
                   <svg className="footer__social-icon" width="24" height="24"><use xlinkHref="#icon-inst"></use></svg>
-                </button>
+                </a>
               </li>
               <li className="footer__social-item">
-                <button className="footer__social-link" title="ссылка на страницу в твитере">
+                <a href="#" className="footer__social-link" title="ссылка на страницу в твитере">
                   <svg className="footer__social-icon" width="24" height="24"><use xlinkHref="#icon-tw"></use></svg>
-                </button>
+                </a>
               </li>
             </ul>
           </div>
@@ -35,19 +35,19 @@ const Footer = () => {
               <h2 className="footer__heading">Каталог</h2>
               <ul className="footer__column-list">
                 <li className="footer__column-item">
-                  <button className="footer__column-link">Акустические гитары</button>
+                  <a href="#" className="footer__column-link">Акустические гитары</a>
                 </li>
                 <li className="footer__column-item">
-                  <button className="footer__column-link">Классические гитары</button>
+                  <a href="#" className="footer__column-link">Классические гитары</a>
                 </li>
                 <li className="footer__column-item">
-                  <button className="footer__column-link">Электрогитары</button>
+                  <a href="#" className="footer__column-link">Электрогитары</a>
                 </li>
                 <li className="footer__column-item">
-                  <button className="footer__column-link">Бас-гитары</button>
+                  <a href="#" className="footer__column-link">Бас-гитары</a>
                 </li>
                 <li className="footer__column-item">
-                  <button className="footer__column-link">Укулеле</button>
+                  <a href="#" className="footer__column-link">Укулеле</a>
                 </li>
               </ul>
             </div>
@@ -55,19 +55,19 @@ const Footer = () => {
               <h2 className="footer__heading">Информация</h2>
               <ul className="footer__column-list">
                 <li className="footer__column-item">
-                  <button className="footer__column-link">Где купить?</button>
+                  <a href="#" className="footer__column-link">Где купить?</a>
                 </li>
                 <li className="footer__column-item">
-                  <button className="footer__column-link">Блог</button>
+                  <a href="#" className="footer__column-link">Блог</a>
                 </li>
                 <li className="footer__column-item">
-                  <button className="footer__column-link">Вопрос - ответ</button>
+                  <a href="#" className="footer__column-link">Вопрос - ответ</a>
                 </li>
                 <li className="footer__column-item">
-                  <button className="footer__column-link">Возврат</button>
+                  <a href="#" className="footer__column-link">Возврат</a>
                 </li>
                 <li className="footer__column-item">
-                  <button className="footer__column-link">Сервис-центры</button>
+                  <a href="#"className="footer__column-link">Сервис-центры</a>
                 </li>
               </ul>
             </div>

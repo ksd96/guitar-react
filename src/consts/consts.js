@@ -17,7 +17,7 @@ const activePage = {
 
 const pageLinks = {
   HOME: {name: `Главная`, link: `#`},
-  CATALOG: {name: `Каталог`, link: `/`}
+  CATALOG: {name: `Каталог`, link: `/guitar-react/`}
 };
 
 const promoErrorMessage = {
