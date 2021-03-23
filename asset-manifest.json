@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/guitar-react/static/css/main.51d9745b.chunk.css",
-    "main.js": "/guitar-react/static/js/main.0e9a6b66.chunk.js",
-    "main.js.map": "/guitar-react/static/js/main.0e9a6b66.chunk.js.map",
+    "main.css": "/guitar-react/static/css/main.4073f05b.chunk.css",
+    "main.js": "/guitar-react/static/js/main.5a65268b.chunk.js",
+    "main.js.map": "/guitar-react/static/js/main.5a65268b.chunk.js.map",
     "runtime-main.js": "/guitar-react/static/js/runtime-main.41632e60.js",
     "runtime-main.js.map": "/guitar-react/static/js/runtime-main.41632e60.js.map",
     "static/js/2.5ece6894.chunk.js": "/guitar-react/static/js/2.5ece6894.chunk.js",
     "static/js/2.5ece6894.chunk.js.map": "/guitar-react/static/js/2.5ece6894.chunk.js.map",
     "index.html": "/guitar-react/index.html",
-    "static/css/main.51d9745b.chunk.css.map": "/guitar-react/static/css/main.51d9745b.chunk.css.map",
+    "static/css/main.4073f05b.chunk.css.map": "/guitar-react/static/css/main.4073f05b.chunk.css.map",
     "static/js/2.5ece6894.chunk.js.LICENSE.txt": "/guitar-react/static/js/2.5ece6894.chunk.js.LICENSE.txt",
     "static/media/footer.scss": "/guitar-react/static/media/icon-time.07706131.svg",
     "static/media/filter.scss": "/guitar-react/static/media/icon-check.04199ead.svg",
@@ -19,7 +19,7 @@
   "entrypoints": [
     "static/js/runtime-main.41632e60.js",
     "static/js/2.5ece6894.chunk.js",
-    "static/css/main.51d9745b.chunk.css",
-    "static/js/main.0e9a6b66.chunk.js"
+    "static/css/main.4073f05b.chunk.css",
+    "static/js/main.5a65268b.chunk.js"
   ]
 }
