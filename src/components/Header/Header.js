@@ -8,35 +8,35 @@ const Header = () => {
     <header className="header">
       <div className="header__wrapper-top">
         <div className="header__wrapper">
-          <a href="#" className="header__logo-link">
+          <Link to="#" className="header__logo-link">
             <svg className="header__logo" width="67" height="70"><use xlinkHref="#logo"></use></svg>
-          </a>
+          </Link>
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item">
                 <Link to="/" className="header__nav-link">Каталог</Link>
               </li>
               <li className="header__nav-item">
-                <a href="#" className="header__nav-link">Где купить?</a>
+                <Link to="#" className="header__nav-link">Где купить?</Link>
               </li>
               <li className="header__nav-item">
-                <a href="#" className="header__nav-link">О компании</a>
+                <Link to="#" className="header__nav-link">О компании</Link>
               </li>
               <li className="header__nav-item">
-                <a href="#" className="header__nav-link">Cервис-центры</a>
+                <Link to="#" className="header__nav-link">Cервис-центры</Link>
               </li>
             </ul>
           </nav>
           <ul className="header__buttons-list">
             <li className="header__buttons-item">
-              <a href="#" className="header__button">
+              <Link to="#" className="header__button">
                 <svg className="header__button-icon" width="14" height="17"><use xlinkHref="#icon-map"></use></svg>
-              </a>
+              </Link>
             </li>
             <li className="header__buttons-item">
-              <a href="#" className="header__button">
+              <Link to="#" className="header__button">
                 <svg className="header__button-icon" width="14" height="14"><use xlinkHref="#icon-search"></use></svg>
-              </a>
+              </Link>
             </li>
             <li className="header__buttons-item">
               <Link to="/basket" className="header__button header__button_basket">
